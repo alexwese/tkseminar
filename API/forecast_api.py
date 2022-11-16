@@ -22,9 +22,6 @@ from tornado import gen
 from datetime import datetime
 import calendar
 from dateutil.relativedelta import relativedelta
-from lib.metadata import getmetadata
-from lib.verify import verify_token
-from lib.base import BaseHandler
 
 
 logging.Formatter.converter = time.gmtime
@@ -45,13 +42,30 @@ class HelperClass():
                 return sarima.SarimaForecast.makeForecast(sarima, totalled_df, int(steps))
             if algorithm ==  "nbeats":
                 return nbeats.NBeatsForecast.makeForecast(nbeats,totalled_df,int(steps))
-            if algorithm ==  "automatic":
-                return OptimizedForecaster.makeForecast(self,totalled_df,int(steps))
             else: 
                 return ProphetForecast.ProphetForecast.makeForecast(ProphetForecast,totalled_df,int(steps))
         except Exception as e:
             logging.error(e)
 
+
+
+
+
+class BaseHandler(tornado.web.RequestHandler):
+
+    def get(self, *args, **kwargs):
+        self.write("Forecasting API ist ready.")
+
+    def set_default_headers(self, *args, **kwargs):
+        self.set_header("Access-Control-Allow-Origin", "*")
+        self.set_header("Access-Control-Allow-Headers", "x-requested-with, Content-Type")
+        self.set_header("Access-Control-Allow-Methods", "POST, GET, OPTIONS")
+        # logging.info("set default headers")
+    
+    def options(self):
+        # no body
+        self.set_status(204)
+        self.finish()
 
 
 
@@ -102,7 +116,7 @@ class ProphetForecastHandler(BaseHandler):
 
         
         #Get Response
-        response = helper.getResponse(algorithm,df,steps)
+        response = ProphetForecast.ProphetForecast.makeForecast(algorithm,df,steps)
 
         #Send response back        
         response = response.to_json(orient='records')
@@ -121,16 +135,14 @@ class ProphetForecastHandler(BaseHandler):
 # for the currently available forecasting algorithms
 #
 def make_app():
-    logging.info("Forecasting API listening under Port 8081/tcp ...")
+    logging.info("Forecasting API listening under Port 8061/tcp ...")
     return tornado.web.Application([
-        (r"/", BaseHandler),
         (r"/getProphetForecast", ProphetForecastHandler) 
     ])
 
 # main function
 if __name__ == "__main__":
     logging.info("Starting forecasting API ...")
-    hana = HANAConnector()
     app = make_app()
-    app.listen(8081)
+    app.listen(8061)
     tornado.ioloop.IOLoop.current().start()
