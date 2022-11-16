@@ -61,25 +61,29 @@ class restcall():
 
 df = pd.read_csv("aluminium.csv",thousands='.', decimal=',')
 df = df[['Date', 'Price']]
+#df = pd.to_datetime(df['Date'], format='%m/%d/%y')
 
 print(df)
-r = restcall.forecast(10,df)
+r = restcall.forecast(365,df)
 
 r = r.rename(columns={'DATE': 'Date', 'SALES': 'Price'})
+r['Date'] = pd.to_datetime(r['Date'], format='%y-%m-%d')
+#r = pd.to_datetime(r['Date'], format='%m/%d/%y')
 
-
-
+logging.info(r)
+print(r.dtypes)
 
 # vizualize forecast
 #df_merged.plot(x='Date', y='Price', style='o')
 
+outputURL = "output_series.xlsx"
 
-plt.figure() 
-plt.plot(r["Price"], color="blue")
-plt.gcf().autofmt_xdate() 
+with pd.ExcelWriter(outputURL) as writer:
+            
+    r.to_excel(writer,"name")
+    writer.save()
+
+
+plt.plot(r['Date'],r['Price'], color="blue")
 plt.show()
-
-
-#plt.plot(df_merged["Price"], color="blue")
-#plt.show()
 

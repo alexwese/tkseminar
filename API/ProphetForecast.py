@@ -37,16 +37,18 @@ class ProphetForecast():
         #try:
         # initialize prophet and build a model
         logging.info("Fitting prophet model ...")
-        m = Prophet(yearly_seasonality=10)
+        m = Prophet(daily_seasonality=10)
         m.fit(prophet_df)
 
         # predict n steps
         logging.info("Predicting next "+ str(steps)+" steps ...")
-        future = m.make_future_dataframe(periods=steps,freq="M")
+        future = m.make_future_dataframe(periods=steps,freq="D")
         forecast = m.predict(future)
         prophet_df2 = pd.DataFrame(forecast[['ds', 'yhat']])
         logging.info(prophet_df2)
         prophet_df2.columns = ['DATE','SALES']
+        prophet_df2['DATE'] = pd.to_datetime(prophet_df2['DATE'], format='%y-%m-%d')
+        prophet_df2['DATE'].dt.strftime('%m/%d/%Y')
 
         #new_values = prophet_df2.tail(steps)
         #new_values['DATE'] = datetime.strptime(new_values['DATE'], "%y-%m-%d")
