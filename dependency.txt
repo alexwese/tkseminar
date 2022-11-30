@@ -1,0 +1,2 @@
+npm install @antv/g6
+npm install bootstrap@5.2.3
