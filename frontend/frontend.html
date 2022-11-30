@@ -7,6 +7,7 @@
 </head>
 <body>
 
+<form action="http://localhost:8080/calculate" method="POST">
 <div class="tree">
 	<ul>
 		<li>
@@ -17,26 +18,26 @@
 					<ul>
             			<li>
 							<a href="#">x1 </br>
-								<form action="http://localhost:8080" method="POST">
+								
 									<label for="prob1">Probability: </label>
 									<input type="number" id="prob1" min="0" max="100">
 									</br>
 									<label for="imp1">Impact: </label>
 									<input type="range" id="imp1" min="0" max="5">
-								</form>
+								
 							</a>
 
 						</li>
 						<li>
 							<a href="#">x2
-								<form action="frontend.js">
+								
 									<form action="frontend.js">
 									<label for="prob2">Probability: </label>
 									<input type="number" id="prob2" min="0" max="100">
 									</br>
 									<label for="imp2">Impact: </label>
 									<input type="range" id="imp2" min="0" max="5">
-								</form>
+								
 							</a>
 						</li>
 					</ul>
@@ -47,36 +48,32 @@
 						<ul>
                         <li>
 							<a href="#">y1
-								<form action="frontend.js">
 									<label for="prob3">Probability: </label>
 									<input type="number" id="prob3" min="0" max="100">
 									</br>
 									<label for="imp3">Impact: </label>
 									<input type="range" id="imp3" min="0" max="5">
-								</form>
-								</form>
+
 								</a>
 						</li>
 						<li>
 							<a href="#">y2
-								<form action="frontend.js">
+
 									<label for="prob4">Probability: </label>
 									<input type="number" id="prob4" min="0" max="100">
 									</br>
 									<label for="imp4">Impact: </label>
 									<input type="range" id="imp4" min="0" max="5">
-								</form>
+
 							</a>
 						</li>
                             <li>
 							<a href="#">y3
-								<form action="frontend.js">
 									<label for="prob5">Probability: </label>
 									<input type="number" id="prob5" min="0" max="100">
 									</br>
 									<label for="imp5">Impact: </label>
 									<input type="range" id="imp5" min="0" max="5">
-								</form>
 							</a>
 						</li>
 					</ul>
@@ -88,37 +85,33 @@
 						<ul>
                         <li>
 							<a href="#">z1
-								<form action="frontend.js">
 									<label for="prob6">Probability: </label>
 									<input type="number" id="prob6" min="0" max="100">
 									</br>
 									<label for="imp6">Impact: </label>
 									<input type="range" id="imp6" min="0" max="5">
-								</form>
 							</a>
 						</li>
 						<li>
 							<a href="#">z2
-								<form action="frontend.js">
 									<label for="prob7">Probability: </label>
 									<input type="number" id="prob7" min="0" max="100">
 									</br>
 									<label for="imp7">Impact: </label>
 									<input type="range" id="imp7"
 										   min="0" max="5">
-								</form>
+
 							</a>
 						</li>
                             <li>
 							<a href="#">y3
-								<form action="frontend.js">
 									<label for="prob8">Probability: </label>
 									<input type="number" id="prob8" min="0" max="100">
 									</br>
 									<label for="imp8">Impact: </label>
 									<input type="range" id="imp8"
 										   min="0" max="5">
-								</form>
+
 							</a>
 						</li>
 					</ul>
@@ -128,6 +121,20 @@
 		</li>
 	</ul>
 </div>
+
+<div>
+    <button>Send</button>
+  </div>
+
+</form>
+
+
+</script>
+
+
+</script>
+
+
 
 </body>
 </html>
