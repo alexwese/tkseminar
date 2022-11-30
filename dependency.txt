@@ -1,2 +1,4 @@
 npm install @antv/g6
 npm install bootstrap@5.2.3
+pip install flask
+pip install pandas
