@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>TK Risk Tool</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="mystyle.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Risk Analysis Tool</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Searchterm..." aria-label="Search">
+              <button class="btn btn btn-light" type="submit">Search</button>
+            </form>
+          </div>
+        </div>
+      </nav>
+
+
+      <div id="content" class="container-fluid text-center">
+        <h2>Risk Impact Graph</h2>
+        <!-- Content here-->
+        <div class="container text-center">
+          <div id ="placeholder" class="row"></div>
+          <div class="row">
+            <div class="col"><h5>Trigger Events</h5></div>
+            <div class="col"></div>
+            <div class="col"><h5>Risk Events</h5></div>
+            <div class="col"></div>
+            <div class="col"><h5>Consequences</h5></div>
+          </div>
+          <div id ="placeholder" class="row"></div>
+          <div class="row">
+            <div div id="trigger1" class="col point card">
+              <div class="card-body">
+                <h5 class="card-title">Trigger One</h5>
+              </div>
+              <div class="card-footer bg-transparent">
+                <div class="row">
+                  <div class="col-5">
+                    <label for="probInput1" class="form-label">Probability</label>
+                  </div>
+                  <div class="col-7">
+                    <input type="number" class="form-control" id="probInput1" min="0" max="1" step="0.1" value="0.1" onchange="updateProb1(this.value);">
+                  </div>
+                </div>
+                <div id ="placeholder" class="row"></div>
+                <div class="row">
+                  <div class="col-3">
+                    <label for="impactInput1" class="form-label">Impact</label>
+                  </div>
+                  <div class="col-9">
+                    <input type="range" class="form-range" min="0" max="1" step="0.25" id="impactInput1" oninput="updateWeight1(this.value);"> 
+                  </div>
+                </div>
+                <div id ="placeholder" class="row"></div>
+                <div class="row">
+                  <div class="col-8">
+                    <label for="sign1" class="form-label">Lowering Impact</label>
+                  </div>
+                  <div class="col-3">
+                    <input class="form-check-input" type="checkbox" value="" id="sign1" onchange="changeSign1(this.checked);">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div div id="re1" class="col point card">
+              <div class="card-body">
+                <h5 class="card-title">Energy price fluctuation </h5>
+              </div>
+              <div class="card-footer bg-transparent">
+                Risk Factor: <b id="re1factor">0.1</b>
+              </div>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+            <div id="trigger2" class="col point card">
+              <div class="card-body">
+                <h5 class="card-title">Trigger Two</h5>
+              </div>
+              <div class="card-footer bg-transparent">
+                <div class="row">
+                  <div class="col-5">
+                    <label for="probInput2" class="form-label">Probability</label>
+                  </div>
+                  <div class="col-7">
+                    <input type="number" class="form-control" id="probInput2" min="0" max="1" step="0.1" value="0.1" onchange="updateProb2(this.value);">
+                  </div>
+                </div>
+                <div id ="placeholder" class="row"></div>
+                <div class="row">
+                  <div class="col-3">
+                    <label for="impactInput2" class="form-label">Impact</label>
+                  </div>
+                  <div class="col-9">
+                    <input type="range" class="form-range" min="0" max="1" step="0.25" id="impactInput2" oninput="updateWeight2(this.value);"> 
+                  </div>
+                </div>
+                <div id ="placeholder" class="row"></div>
+                <div class="row">
+                  <div class="col-8">
+                    <label for="sign1" class="form-label">Lowering Impact</label>
+                  </div>
+                  <div class="col-3">
+                    <input class="form-check-input" type="checkbox" value="" id="sign1" onchange="changeSign2(this.checked);">
+                  </div>
+                </div> 
+              </div>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div id="price" class="col point card">
+              <div class="card-body">
+                <h5 class="card-title"> Aluminium price fluctuation </h5>
+              </div>
+              <div class="card-footer bg-transparent">
+                Risk Factor: <b id="endPrice">0.11</b>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div div id="re2" class="col point card">
+              <div class="card-body">
+                <h5 class="card-title">Demand fluctuation </h5>
+              </div>
+              <div class="card-footer bg-transparent">
+                Risk Factor: <b>0.12</b>
+              </div>
+            </div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
+          </div> 
+          <div id ="placeholder" class="row"></div>
+        </div>
+        <script src="leader-line.min.js"></script>
+        <script src="myscript.js"></script>
+      </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+</body>
+</html>
