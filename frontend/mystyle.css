@@ -1,0 +1,21 @@
+.point {
+    background-color: #89B0AE;
+    min-height: 80px;
+    color: whitesmoke;
+}
+
+.navbar-dark {
+    background-color: #89B0AE !important;
+}
+
+.form-range::-webkit-slider-thumb {
+    background: #E8F5F2;
+}
+
+.card {
+    border-radius: 40px
+}
+
+#placeholder{
+    min-height: 20px;
+}
