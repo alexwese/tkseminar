@@ -19,3 +19,13 @@
 #placeholder{
     min-height: 20px;
 }
+
+.btn-primary {
+    --bs-btn-font-weight: 600;
+    --bs-btn-color: var(--bs-white);
+    --bs-btn-bg: #89B0AE;
+    --bs-btn-hover-bg: #6e918f;
+    --bs-btn-hover-border-color: #6e918f;
+    --bs-btn-border-color: var(--bs-white);
+   
+}

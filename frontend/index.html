@@ -35,38 +35,40 @@
         <!-- Content here-->
         <div class="container text-center">
           <div id ="placeholder" class="row"></div>
-          <div class="row">
-            <div class="col"><h5>Trigger Events</h5></div>
-            <div class="col"></div>
-            <div class="col"><h5>Risk Events</h5></div>
-            <div class="col"></div>
-            <div class="col"><h5>Consequences</h5></div>
-          </div>
+          
           <div id ="placeholder" class="row"></div>
           <div class="row">
             <div div id="trigger1" class="col point card">
+              <h5 class="card-header bg-transparent">Trigger One</h5>
               <div class="card-body">
-                <h5 class="card-title">Trigger One</h5>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="probInput2" class="form-label">Base Value</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control" id="probInput2" value="200" onchange="updateProb2(this.value);">
+                  </div>
+                </div>
+                <div id ="placeholder" class="row"></div>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="probInput2" class="form-label">Change (%)</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control" id="probInput2" step="10" value="0.1" onchange="updateProb2(this.value);">
+                  </div>
+                </div>
+                <div id ="placeholder" class="row"></div>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="probInput2" class="form-label">Probability (%)</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control" id="probInput2" min="0" max="100" step="10" value="100" onchange="updateProb2(this.value);">
+                  </div>
+                </div>
               </div>
               <div class="card-footer bg-transparent">
-                <div class="row">
-                  <div class="col-5">
-                    <label for="probInput1" class="form-label">Probability</label>
-                  </div>
-                  <div class="col-7">
-                    <input type="number" class="form-control" id="probInput1" min="0" max="1" step="0.1" value="0.1" onchange="updateProb1(this.value);">
-                  </div>
-                </div>
-                <div id ="placeholder" class="row"></div>
-                <div class="row">
-                  <div class="col-3">
-                    <label for="impactInput1" class="form-label">Impact</label>
-                  </div>
-                  <div class="col-9">
-                    <input type="range" class="form-range" min="0" max="1" step="0.25" id="impactInput1" oninput="updateWeight1(this.value);"> 
-                  </div>
-                </div>
-                <div id ="placeholder" class="row"></div>
                 <div class="row">
                   <div class="col-8">
                     <label for="sign1" class="form-label">Lowering Impact</label>
@@ -74,7 +76,7 @@
                   <div class="col-3">
                     <input class="form-check-input" type="checkbox" value="" id="sign1" onchange="changeSign1(this.checked);">
                   </div>
-                </div>
+                </div> 
               </div>
             </div>
             <div class="col"></div>
@@ -86,59 +88,60 @@
             <div class="col"></div>
             <div class="col"></div>
             <div div id="re1" class="col point card">
+              <h5 class="card-header bg-transparent">Energy Price Index</h5>
               <div class="card-body">
-                <h5 class="card-title">Energy price fluctuation </h5>
-              </div>
-              <div class="card-footer bg-transparent">
-                Risk Factor: <b id="re1factor">0.1</b>
-              </div>
-            </div>
-            <div class="col"></div>
-            <div class="col"></div>
-          </div>
-          <div class="row">
-            <div id="trigger2" class="col point card">
-              <div class="card-body">
-                <h5 class="card-title">Trigger Two</h5>
-              </div>
-              <div class="card-footer bg-transparent">
                 <div class="row">
-                  <div class="col-5">
-                    <label for="probInput2" class="form-label">Probability</label>
+                  <div class="col-6">
+                    <label for="base1" class="form-label">Base Value</label>
                   </div>
-                  <div class="col-7">
-                    <input type="number" class="form-control" id="probInput2" min="0" max="1" step="0.1" value="0.1" onchange="updateProb2(this.value);">
+                  <div class="col-6">
+                    <input type="number" class="form-control" id="base1" value="259,85" onchange="update(this.value,2);">
                   </div>
                 </div>
                 <div id ="placeholder" class="row"></div>
                 <div class="row">
-                  <div class="col-3">
-                    <label for="impactInput2" class="form-label">Impact</label>
+                  <div class="col-6">
+                    <label for="probInput2" class="form-label">Change (%)</label>
                   </div>
-                  <div class="col-9">
-                    <input type="range" class="form-range" min="0" max="1" step="0.25" id="impactInput2" oninput="updateWeight2(this.value);"> 
+                  <div class="col-6">
+                    <input type="number" class="form-control" id="probInput2" step="10" value="0.1" onchange="updateProb2(this.value);">
                   </div>
                 </div>
                 <div id ="placeholder" class="row"></div>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="probInput2" class="form-label">Probability (%)</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control" id="probInput2" min="0" max="100" step="10" value="100" onchange="updateProb2(this.value);">
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer bg-transparent">
                 <div class="row">
                   <div class="col-8">
-                    <label for="sign1" class="form-label">Lowering Impact</label>
+                    <label for="sign2" class="form-label">Lowering Impact</label>
                   </div>
                   <div class="col-3">
-                    <input class="form-check-input" type="checkbox" value="" id="sign1" onchange="changeSign2(this.checked);">
+                    <input class="form-check-input" type="checkbox" value="" id="sign2" onchange="changeSign2(this.checked);">
                   </div>
                 </div> 
               </div>
             </div>
             <div class="col"></div>
             <div class="col"></div>
+          </div>
+          <div class="row">
+            <div class="col"></div>
+            <div class="col"></div>
+            <div class="col"></div>
             <div class="col"></div>
             <div id="price" class="col point card">
               <div class="card-body">
-                <h5 class="card-title"> Aluminium price fluctuation </h5>
+                <h5 class="card-title"> Aluminium Price</h5>
               </div>
               <div class="card-footer bg-transparent">
-                Risk Factor: <b id="endPrice">0.11</b>
+                Base Value ($/ton): <b id="endPrice">3245,79</b>
               </div>
             </div>
           </div>
@@ -146,11 +149,44 @@
             <div class="col"></div>
             <div class="col"></div>
             <div div id="re2" class="col point card">
+              <h5 class="card-header bg-transparent">Globlal Production</h5>
               <div class="card-body">
-                <h5 class="card-title">Demand fluctuation </h5>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="probInput2" class="form-label">Base Value (tons)</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control" id="probInput2" value="5850" onchange="updateProb2(this.value);">
+                  </div>
+                </div>
+                <div id ="placeholder" class="row"></div>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="probInput2" class="form-label">Change (%)</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control" id="probInput2" step="10" value="0.0" onchange="updateProb2(this.value);">
+                  </div>
+                </div>
+                <div id ="placeholder" class="row"></div>
+                <div class="row">
+                  <div class="col-6">
+                    <label for="probInput2" class="form-label">Probability (%)</label>
+                  </div>
+                  <div class="col-6">
+                    <input type="number" class="form-control" id="probInput2" min="0" max="100" step="10" value="100" onchange="updateProb2(this.value);">
+                  </div>
+                </div>
               </div>
               <div class="card-footer bg-transparent">
-                Risk Factor: <b>0.12</b>
+                <div class="row">
+                  <div class="col-8">
+                    <label for="sign3" class="form-label">Lowering Impact</label>
+                  </div>
+                  <div class="col-3">
+                    <input class="form-check-input" type="checkbox" value="" id="sign3" onchange="changeSign3(this.checked);">
+                  </div>
+                </div> 
               </div>
             </div>
             <div class="col"></div>
@@ -168,8 +204,8 @@
         <script src="leader-line.min.js"></script>
         <script src="myscript.js"></script>
       </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> -->
+    <!-- <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script> -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
 </body>
 </html>
