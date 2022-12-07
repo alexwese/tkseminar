@@ -25,11 +25,13 @@ const renderForeignObjectNode = ({
           <ListGroup.Item>
             <h4>{nodeDatum.name}</h4>
           </ListGroup.Item>
-          <ListGroup.Item>Base Value: </ListGroup.Item>
+          <ListGroup.Item>
+            Base Value: {nodeDatum.attributes.absolute_val}
+          </ListGroup.Item>
           <ListGroup.Item>
             <InputGroup className="mb-3">
               <InputGroup.Text id="inputGroup-sizing-default">
-                Default
+                Exp. Change:{nodeDatum.attributes.expected_change}
               </InputGroup.Text>
               <Form.Control
                 aria-label="Default"
@@ -54,7 +56,7 @@ const renderForeignObjectNode = ({
 
 function MyGraph(props) {
   const [translate, containerRef] = useCenteredTree();
-  const nodeSize = { x: 500, y: 500 };
+  const nodeSize = { x: 500, y: 300 };
   const foreignObjectProps = { width: nodeSize.x, height: nodeSize.y, x: 20 };
   return (
     <>
