@@ -5,6 +5,7 @@ import { Button, Navbar, Container } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import MyGraph from "./Components/MyGraph";
+import AppFooter from "./Components/AppFooter";
 
 function App() {
   return (
@@ -21,10 +22,10 @@ function App() {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        <Container id="body">
-          Hallo
+        <Container id="body" fluid>
           <MyGraph></MyGraph>
         </Container>
+        <AppFooter></AppFooter>
       </header>
     </div>
   );

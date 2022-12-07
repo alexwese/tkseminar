@@ -1,6 +1,5 @@
-npm install @antv/g6
-npm install bootstrap@5.2.3
 pip install flask
 pip install pandas
 npm install react-bootstrap bootstrap
 npm install react
+npm install react-d3-tree
