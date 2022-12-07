@@ -21,7 +21,10 @@ function App() {
             </Navbar.Collapse>
           </Container>
         </Navbar>
-        {/* <MyGraph /> */}
+        <Container id="body">
+          Hallo
+          <MyGraph></MyGraph>
+        </Container>
       </header>
     </div>
   );

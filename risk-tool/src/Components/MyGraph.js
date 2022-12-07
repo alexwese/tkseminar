@@ -1,7 +1,13 @@
-function MyGraph() {
+import { Container } from "react-bootstrap";
+
+function MyGraph(props) {
   return (
     <>
-      <h5>Graph is displayed here</h5>
+      <div className="text-center">
+        <h5>Don Plzezez add here!!!</h5>
+      </div>
     </>
   );
 }
+
+export default MyGraph;
