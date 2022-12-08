@@ -1,0 +1,111 @@
+{
+  "name": "Aluminium price",
+  "attributes" : {
+    "absolute_val" : 3245.79,
+    "estimated_val" : null
+  },
+  "children": [
+    {
+      "name": "Global zinc price index",
+      "attributes": {
+        "absolute_val": 259.85,
+        "expected_change" : null,
+        "coefficient" : 4.1
+      }},
+    {
+      "name": "Global nickel price index",
+      "attributes": {
+        "absolute_val": 259.85,
+        "expected_change" : null,
+        "coefficient" : 4.1
+      }},
+    {
+      "name": "Global energy price index",
+      "attributes": {
+        "absolute_val": 259.85,
+        "expected_change" : null,
+        "coefficient" : 9
+      },
+      "children": [
+        {
+          "name": "Oil price",
+          "attributes": {
+            "absolute_val": 0,
+            "expected_change": null,
+            "coefficient": "?"
+          }},
+        {
+          "name": "Gas price",
+          "attributes": {
+            "absolute_val": 0,
+            "expected_change": null,
+            "coefficient": "?"
+          }}]},
+    {
+      "name": "USD index",
+      "attributes": {
+        "absolute_val": 105.07,
+        "expected_change" : null,
+        "coefficient" : 9
+      }},
+    {
+      "name": "Global production (1000 tons)",
+      "attributes": {
+        "absolute_val": 5850,
+        "expected_change" : null,
+        "coefficient" : 0.13
+      },
+      "children": [
+        {
+          "name": "Chinese Production",
+          "attributes": {
+            "absolute_val": 0,
+            "expected_change": null,
+            "coefficient": "?"
+          }},
+        {
+          "name": "Africa Production",
+          "attributes": {
+            "absolute_val": 0,
+            "expected_change": null,
+            "coefficient": "?"
+          }},
+        {
+          "name": "Asia (ex China) Production",
+          "attributes": {
+            "absolute_val": 0,
+            "expected_change": null,
+            "coefficient": "?"
+          }},
+        {
+          "name": "Gulf Production",
+          "attributes": {
+            "absolute_val": 0,
+            "expected_change": null,
+            "coefficient": "?"
+          }}]
+    },
+    {
+      "name": "CNY - USD index",
+      "attributes": {
+        "absolute_val": 105.07,
+        "expected_change" : null,
+        "coefficient" : 0.13
+      }},
+    {
+      "name": "RUB - USD index",
+      "attributes": {
+        "absolute_val": 105.07,
+        "expected_change" : null,
+        "coefficient" : 0.13
+      }},
+    {
+      "name": "RBI - USD index",
+      "attributes": {
+        "absolute_val": 105.07,
+        "expected_change" : null,
+        "coefficient" : 0.13
+      }}
+    ]
+}
+
