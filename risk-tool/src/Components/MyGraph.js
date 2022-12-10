@@ -24,7 +24,7 @@ const renderForeignObjectNode = ({
           <ListGroup.Item>
             <h4>{nodeDatum.name}</h4>
           </ListGroup.Item>
-          <NodeInput attributes={nodeDatum.attributes} />
+          <NodeInput attributes={nodeDatum} />
           <ListGroup.Item>
             {nodeDatum.hasOwnProperty("children") ? (
               <Button onClick={toggleNode}>

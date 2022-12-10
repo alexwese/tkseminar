@@ -13,14 +13,20 @@ import Collapse from "react-bootstrap/Collapse";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-export default function NodeInput(attributes) {
+export default function NodeInput(nodeDatum) {
+  // console.log(JSON.stringify(nodeDatum.attributes.attributes.absolute_val));
+
   const [open, setOpen] = useState(false);
   const [expChange, setExpChange] = useState(
-    attributes.attributes.expected_change
+    nodeDatum.attributes.attributes.expected_change
   );
-  const [expValue, setExpValue] = useState(attributes.attributes.absolute_val);
+  const [expValue, setExpValue] = useState(
+    nodeDatum.attributes.attributes.absolute_val
+  );
 
-  const [baseValue, setBaseValue] = useState(attributes.attributes.base_val);
+  const [baseValue, setBaseValue] = useState(
+    nodeDatum.attributes.attributes.base_val
+  );
 
   //HTTP Connectionvar
   var url = "https://reqbin.com/echo/post/json";
@@ -35,6 +41,7 @@ export default function NodeInput(attributes) {
   };
 
   const handleSubmit = (event) => {
+    event.preventDefault();
     console.log("do validate");
     console.log("new change", { expChange });
     xhr.open("POST", url);
@@ -52,14 +59,14 @@ export default function NodeInput(attributes) {
       }
     };
 
-    var data = `{
-     "Id": 12345,
-     "Customer": "John Smith",
-     "Quantity": 1,
-     "Price": 10.00
-   }`;
+    var dataObject = {
+      id: nodeDatum.attributes.name,
+      expChange: expChange,
+    };
 
-    xhr.send(data);
+    console.log(JSON.stringify(dataObject));
+
+    xhr.send(dataObject);
   };
 
   const handleKeyDown = (event) => {
