@@ -34,7 +34,7 @@
     "inputs": [
             {
                 "node_id": "r1",
-                "expected_val": 0
+                "expected_val": 24
             }
         ]
 
