@@ -2,7 +2,7 @@ import { Container, Navbar, NavbarBrand } from "react-bootstrap";
 
 function AppFooter() {
   return (
-    <div>
+    <div className="fixed-bottom">
       <Navbar bg="dark" variant="dark">
         <Container>
           <NavbarBrand>Footer</NavbarBrand>

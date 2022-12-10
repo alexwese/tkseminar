@@ -3,3 +3,6 @@ pip install pandas
 npm install react-bootstrap bootstrap
 npm install react
 npm install react-d3-tree
+npm install @mui/icons-material
+npm install @mui/material @emotion/react @emotion/styled
+
