@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import "./nodeInput.css";
 
@@ -14,8 +15,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 export default function NodeInput(nodeDatum) {
-  // console.log(JSON.stringify(nodeDatum.attributes.attributes.absolute_val));
-
   const [open, setOpen] = useState(false);
   const [expChange, setExpChange] = useState(
     nodeDatum.attributes.attributes.expected_change
@@ -28,10 +27,6 @@ export default function NodeInput(nodeDatum) {
     nodeDatum.attributes.attributes.base_val
   );
 
-  //HTTP Connectionvar
-  var url = "https://reqbin.com/echo/post/json";
-  var xhr = new XMLHttpRequest();
-
   const handleChange = (event) => {
     // Get input value from "event"
     setExpChange(event.target.value);
@@ -43,30 +38,41 @@ export default function NodeInput(nodeDatum) {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log("do validate");
-    console.log("new change", { expChange });
-    xhr.open("POST", url);
-
-    xhr.setRequestHeader(
-      "Authorization",
-      "Bearer mt0dgHmLJMVQhvjpNXDyA83vA_PxH23Y"
-    );
-    xhr.setRequestHeader("Content-Type", "application/json");
-
-    xhr.onreadystatechange = function () {
-      if (xhr.readyState === 4) {
-        console.log(xhr.status);
-        console.log(xhr.responseText);
-      }
-    };
 
     var dataObject = {
       id: nodeDatum.attributes.name,
       expChange: expChange,
     };
 
-    console.log(JSON.stringify(dataObject));
+    // axios
+    //   .post(`https://reqbin.com/echo/post/json`, { dataObject })
+    //   .then((res) => {
+    //     console.log(res);
+    //     console.log(res.data);
+    //   });
 
-    xhr.send(dataObject);
+    axios.get(`http://localhost:8080/build_network`).then((res) => {
+      console.log(res);
+      console.log(res.data);
+    });
+
+    // xhr.open("POST", url);
+
+    // xhr.setRequestHeader("Content-Type", "application/json");
+
+    // xhr.onreadystatechange = function () {
+    //   if (xhr.readyState === 4) {
+    //     console.log(xhr.status);
+    //     console.log(xhr.responseText);
+    //   }
+    // };
+
+    // var dataObject = {
+    //   id: nodeDatum.attributes.name,
+    //   expChange: expChange,
+    // };
+
+    // xhr.send(JSON.stringify(dataObject));
   };
 
   const handleKeyDown = (event) => {

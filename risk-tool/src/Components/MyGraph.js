@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Tree from "react-d3-tree";
+import axios from "axios";
 
 import orgChartJson from "../data/risk_data.json";
 import { useCenteredTree } from "./myGraphHelpers";
@@ -10,6 +11,12 @@ import NodeInput from "./NodeInput";
 import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
+
+function getGraph(username) {
+  axios.get(`http://localhost:8080/build_network`).then((res) => {
+    return res.data;
+  });
+}
 
 const renderForeignObjectNode = ({
   nodeDatum,
@@ -56,7 +63,7 @@ function MyGraph(props) {
       <div className="text-center">
         <div id="treeWrapper" style={{ width: "100%", height: "90vh" }}>
           <Tree
-            data={orgChartJson}
+            data={getGraph("")}
             translate={translate}
             nodeSize={nodeSize}
             renderCustomNodeElement={(rd3tProps) =>
