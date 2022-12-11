@@ -107,6 +107,15 @@
             "expected_change": 0,
             "coefficient": "?"
           }
+        },
+        {
+          "name": "NEW NODE PRODUCTION",
+          "attributes": {
+            "absolute_val": 0,
+            "base_val": 0,
+            "expected_change": 0,
+            "coefficient": "?"
+          }
         }
       ]
     },

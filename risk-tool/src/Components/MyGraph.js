@@ -12,11 +12,19 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-function getGraph(username) {
-  axios.get(`http://localhost:8080/build_network`).then((res) => {
-    return res.data;
-  });
+const url = `http://localhost:8080/build_network`;
+
+async function getGraph() {
+  try {
+    const response = await axios.get(url);
+
+    return response.data;
+  } catch (err) {
+    console.log(err);
+  }
 }
+
+const graph = await getGraph();
 
 const renderForeignObjectNode = ({
   nodeDatum,
@@ -62,8 +70,9 @@ function MyGraph(props) {
     <>
       <div className="text-center">
         <div id="treeWrapper" style={{ width: "100%", height: "90vh" }}>
+          {console.log("return value:", graph)}
           <Tree
-            data={getGraph("")}
+            data={graph}
             translate={translate}
             nodeSize={nodeSize}
             renderCustomNodeElement={(rd3tProps) =>
