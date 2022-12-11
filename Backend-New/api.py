@@ -3,9 +3,15 @@ from flask_cors import CORS
 import pandas as pd
 import logging
 from Node import Node
+from NewNode import NewNode
 import json
+from json import JSONEncoder
 from main import *
 from pathlib import Path
+
+class CustomEncoder(json.JSONEncoder):
+    def default(self, o):
+            return o.__dict__
 
 app = Flask(__name__)
 cors = CORS(app)
@@ -14,8 +20,6 @@ logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:
     level=logging.INFO)
 
 @app.route('/calculate_price', methods=['POST'])
-
-
 
 def calculate_price():
     nodes_list = []
@@ -50,6 +54,56 @@ def calculate_price():
             result = i.expected_val
     return jsonify(result)
 
+@app.route('/calculate', methods=['POST'])
+
+def calculate():
+    content = request.json
+    network = json.load(open("risk_data.json"))
+    inputs = content['inputs']
+    nodes = network['children']
+    nodes_list = []
+
+    for i in nodes:
+        if "children" in i:
+            child_list = []
+            new_node = NewNode(i['attributes']['node_id'], i['name'], i['attributes']['absolute_val'],
+                                      i['attributes']['base_val'], i['attributes']['expected_change'],
+                                      i['attributes']['coefficient'], [])
+            for j in i['children']:
+                child_list.append(NewNode(j['attributes']['node_id'], j['name'], j['attributes']['absolute_val'],
+                                      j['attributes']['base_val'], j['attributes']['expected_change'],
+                                      j['attributes']['coefficient'], []))
+            new_node.add_child(child_list)
+            nodes_list.append(new_node)
+        else:
+            nodes_list.append(NewNode(i['attributes']['node_id'], i['name'], i['attributes']['absolute_val'],
+                                      i['attributes']['base_val'], i['attributes']['expected_change'],
+                                      i['attributes']['coefficient'], []))
+    result = []
+    for i in inputs:
+        for obj in nodes_list:
+            if i['node_id'] == obj.node_id:
+                logging.info(obj.name)
+                obj.set_expected_change(i['expected_change'])
+                logging.info(obj.cal_absolute_value())
+                break
+            if obj.children:
+                for child in obj.children:
+                    if i['node_id'] == child.node_id:
+                        logging.info(child.name)
+                        logging.info(child.impact)
+                        child.set_expected_change(i['expected_change'])
+                        logging.info(child.impact)
+                        logging.info(obj.cal_absolute_value())
+
+# final update for all nodes
+    for node in nodes_list:
+        node.cal_absolute_value()
+        result = json.dumps(node, cls=CustomEncoder)
+    return jsonify(result)
+
+
+
 @app.route('/build_network', methods=['GET'])
 
 def build_network():
@@ -62,27 +116,8 @@ def build_network():
     file.close()
     return base_network
 
-@app.route('/calculate_result', methods=['POST'])
-
-def  calculate_result():
-    content = request.json
-    logging.info(content)
-    nodes = content['children']
-    flag = False
 
 
-    for i in nodes:
-        if i["attributes"]['expected_change'] != None:
-            flag = True
-        if "children" in i:
-            for j in i['children']:
-                if j["attributes"]["expected_change"] != None:
-                    flag = True
-
-    if flag == False:
-        return jsonify(content)
-    else:
-        pass
 
 
 if __name__ == '__main__':
