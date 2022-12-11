@@ -31,7 +31,7 @@ class NewNode:
         if self.children:
             for node in self.children:
                 sum_impact = sum_impact + node.impact
-            self.absolute_val = sum_impact
+            self.absolute_val = sum_impact # + node.intercept
         else:
             self.absolute_val = self.base_val
         return self.absolute_val

@@ -44,7 +44,7 @@
             "node_id": 105,
             "absolute_val": 259.85,
             "base_val": 259.85,
-            "expected_change": 0,
+            "expected_change": 50,
             "coefficient": 0.13
           }
         },
