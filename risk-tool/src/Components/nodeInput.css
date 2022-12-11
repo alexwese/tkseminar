@@ -1,0 +1,27 @@
+#edit {
+  margin: 0 0 -10px -25px;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+#submit {
+  margin: 13px 0 0 -25px;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+#pencil {
+  color: black;
+  stroke-width: 0;
+}
+
+#pencil:hover {
+  color: rgb(61, 61, 61);
+  font-size: 23px;
+  padding-left: 2px;
+  stroke-width: 0;
+}
+
+#example-collapse-text {
+  padding: 0 16px 0 16px;
+}

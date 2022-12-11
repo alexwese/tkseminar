@@ -1,4 +1,5 @@
 from flask import Flask,request,jsonify
+from flask_cors import CORS
 import pandas as pd
 import logging
 from Node import Node
@@ -6,12 +7,14 @@ from NewNode import NewNode
 import json
 from json import JSONEncoder
 from main import *
+from pathlib import Path
 
 class CustomEncoder(json.JSONEncoder):
     def default(self, o):
             return o.__dict__
 
 app = Flask(__name__)
+cors = CORS(app)
 logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:%(lineno)d] %(message)s',
     datefmt='%Y-%m-%d %H:%M:%S',
     level=logging.INFO)
@@ -104,7 +107,13 @@ def calculate():
 @app.route('/build_network', methods=['GET'])
 
 def build_network():
-    base_network = json.load(open("risk_data.json"))
+
+    p = Path(__file__).with_name('new_risk_data.json')
+    filename = p.absolute()
+
+    file = open(filename)
+    base_network = json.load(file)
+    file.close()
     return base_network
 
 
