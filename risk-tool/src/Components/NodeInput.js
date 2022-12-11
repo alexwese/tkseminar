@@ -28,11 +28,7 @@ export default function NodeInput(nodeDatum) {
   );
 
   const handleChange = (event) => {
-    // Get input value from "event"
     setExpChange(event.target.value);
-    // if (event.target.value != null) {
-    //   setExpValue(parseFloat(event.target.value) + parseFloat(baseValue));
-    // }
   };
 
   const handleSubmit = (event) => {
@@ -55,24 +51,6 @@ export default function NodeInput(nodeDatum) {
       console.log(res);
       console.log(res.data);
     });
-
-    // xhr.open("POST", url);
-
-    // xhr.setRequestHeader("Content-Type", "application/json");
-
-    // xhr.onreadystatechange = function () {
-    //   if (xhr.readyState === 4) {
-    //     console.log(xhr.status);
-    //     console.log(xhr.responseText);
-    //   }
-    // };
-
-    // var dataObject = {
-    //   id: nodeDatum.attributes.name,
-    //   expChange: expChange,
-    // };
-
-    // xhr.send(JSON.stringify(dataObject));
   };
 
   const handleKeyDown = (event) => {
@@ -85,21 +63,29 @@ export default function NodeInput(nodeDatum) {
     <>
       <ListGroup.Item>
         <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
-          <Form.Label column sm="4">
+          <Form.Label column sm="5">
             Expected Value
           </Form.Label>
-          <Col sm="6">
-            <Form.Control plaintext readOnly type="number" value={expValue} />
+          <Col sm="5">
+            <Form.Control
+              style={{ marginTop: "12px" }}
+              plaintext
+              readOnly
+              type="number"
+              value={expValue}
+            />
           </Col>
           <Col sm="2">
-            <Button
-              id="edit"
-              onClick={() => setOpen(!open)}
-              aria-controls="example-collapse-text"
-              aria-expanded={open}
-            >
-              <EditIcon id="pencil" />
-            </Button>
+            {nodeDatum.attributes.name != "Aluminium price" && (
+              <Button
+                id="edit"
+                onClick={() => setOpen(!open)}
+                aria-controls="example-collapse-text"
+                aria-expanded={open}
+              >
+                <EditIcon id="pencil" />
+              </Button>
+            )}
           </Col>
         </Form.Group>
       </ListGroup.Item>
@@ -111,10 +97,10 @@ export default function NodeInput(nodeDatum) {
               className="mb-3"
               controlId="formPlaintextPassword"
             >
-              <Form.Label column sm="4">
+              <Form.Label column sm="5">
                 Expected Change
               </Form.Label>
-              <Col sm="6">
+              <Col sm="5">
                 <Form.Control
                   type="number"
                   value={expChange}

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Tree from "react-d3-tree";
+
 import axios from "axios";
 
 import orgChartJson from "../data/risk_data.json";
-import { useCenteredTree } from "./myGraphHelpers";
+import { useCenteredTree, getGraph, setUser } from "./myGraphHelpers";
 import "./myGraph.css";
 
 import NodeInput from "./NodeInput";
@@ -12,19 +13,7 @@ import Card from "react-bootstrap/Card";
 import ListGroup from "react-bootstrap/ListGroup";
 import Button from "react-bootstrap/Button";
 
-const url = `http://localhost:8080/build_network`;
-
-async function getGraph() {
-  try {
-    const response = await axios.get(url);
-
-    return response.data;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-const graph = await getGraph();
+const url = `http://localhost:8080`;
 
 const renderForeignObjectNode = ({
   nodeDatum,
@@ -57,33 +46,54 @@ const renderForeignObjectNode = ({
   </g>
 );
 
-function MyGraph(props) {
+const MyGraph = (props) => {
+  //Set variables
   const [translate, containerRef] = useCenteredTree();
-  const nodeSize = { x: 500, y: 500 };
+  const [graph, setGraph] = useState(null);
+  const nodeSize = { x: 500, y: 400 };
   const foreignObjectProps = {
     width: nodeSize.x,
     height: nodeSize.y,
     x: -150,
     y: -100,
   };
+
+  //Get Initial Newtork from API
+  useEffect(() => {
+    const getGraph = async () => {
+      try {
+        const response = await axios.get(url + "/build_network");
+        setGraph(response.data);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getGraph();
+  }, [props]);
+
+  // Update Network after changes
+  // TODO
+
+  //Display Tree
   return (
     <>
       <div className="text-center">
         <div id="treeWrapper" style={{ width: "100%", height: "90vh" }}>
-          {console.log("return value:", graph)}
-          <Tree
-            data={graph}
-            translate={translate}
-            nodeSize={nodeSize}
-            renderCustomNodeElement={(rd3tProps) =>
-              renderForeignObjectNode({ ...rd3tProps, foreignObjectProps })
-            }
-            orientation="horizontal"
-          />
+          {graph && (
+            <Tree
+              data={graph}
+              translate={translate}
+              nodeSize={nodeSize}
+              renderCustomNodeElement={(rd3tProps) =>
+                renderForeignObjectNode({ ...rd3tProps, foreignObjectProps })
+              }
+              orientation="horizontal"
+            />
+          )}
         </div>
       </div>
     </>
   );
-}
+};
 
 export default MyGraph;

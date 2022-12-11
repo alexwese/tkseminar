@@ -6,8 +6,10 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 import MyGraph from "./Components/MyGraph";
 import AppFooter from "./Components/AppFooter";
+import { useState } from "react";
 
 function App() {
+  const [user, setUser] = useState("User1");
   return (
     <div className="App">
       <header>
@@ -17,13 +19,13 @@ function App() {
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
-                Signed in as: <a href="#login">User</a>
+                Signed in as: <a href="#login">{user}</a>
               </Navbar.Text>
             </Navbar.Collapse>
           </Container>
         </Navbar>
         <Container id="body" fluid>
-          <MyGraph></MyGraph>
+          <MyGraph props={user}></MyGraph>
         </Container>
         <AppFooter></AppFooter>
       </header>
