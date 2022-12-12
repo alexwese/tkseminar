@@ -1,4 +1,6 @@
 import logging
+from scipy.optimize import fsolve
+from math import exp
 
 class Node:
     # constructor method
@@ -26,11 +28,13 @@ class Node:
         
         if self.children:
 
+            v = self.new_expected_value - self.intercept 
+            sum = 0
             for i in self.children:
-                
-                pass
+                x = vars
+                sum = sum + i.coefficient * x 
 
-
+            logging.info(sum)
 
     def add_child(self, obj):
         self.children.append(obj)
@@ -47,7 +51,7 @@ class Node:
             for node in self.children:
                 new_expected_value = new_expected_value + node.new_expected_value * node.coefficient
             
-        self.new_expected_value = new_expected_value + self.intercept
+        self.new_expected_value = round(new_expected_value + self.intercept,2)
         
     
 
