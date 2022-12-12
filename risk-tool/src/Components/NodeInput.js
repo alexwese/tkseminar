@@ -24,17 +24,17 @@ export default function NodeInput(props) {
   );
 
   const [expValue, setExpValue] = useState(
-    props.attributes.attributes.absolute_val
+    props.attributes.attributes.new_expected_value
   );
 
   const [baseValue, setBaseValue] = useState(
-    props.attributes.attributes.base_val
+    props.attributes.attributes.initial_regression_value
   );
 
   useEffect(() => {
     setExpChange(props.attributes.attributes.expected_change);
-    setExpValue(props.attributes.attributes.absolute_val);
-    setBaseValue(props.attributes.attributes.base_val);
+    setExpValue(props.attributes.attributes.new_expected_value);
+    setBaseValue(props.attributes.attributes.initial_regression_value);
   }, [props]);
 
   const handleChange = (event) => {
@@ -46,18 +46,11 @@ export default function NodeInput(props) {
     event.preventDefault();
 
     var dataObject = {
-      id: props.attributes.name,
+      id: props.attributes.attributes.node_id,
       expChange: expChange,
     };
 
-    // axios
-    //   .post(url+'/some_adress',  dataObject )
-    //   .then((res) => {
-    //     console.log(res);
-    //     console.log(res.data);
-    //   });
-
-    axios.get(`http://localhost:8080/build_network`).then((res) => {
+    axios.post(url + "/change_network", dataObject).then((res) => {
       props.parentCallback(res.data);
     });
   };
