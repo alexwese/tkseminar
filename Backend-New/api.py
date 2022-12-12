@@ -8,6 +8,7 @@ from json import JSONEncoder
 from main import *
 from pathlib import Path
 
+
 class CustomEncoder(json.JSONEncoder):
     def default(self, o):
             return o.__dict__
