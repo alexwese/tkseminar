@@ -1,3 +1,4 @@
+import logging
 
 class Node:
     # constructor method
@@ -17,8 +18,19 @@ class Node:
 
     def set_expected_change(self, new_value):
         self.expected_change = new_value
+        logging.info("Changed from " + str(self.new_expected_value) + " to " + str(self.new_expected_value + self.expected_change) )
         self.new_expected_value = self.new_expected_value + self.expected_change
-       
+
+
+    def backtrack_change_of_children(self):
+        
+        if self.children:
+
+            for i in self.children:
+                
+                pass
+
+
 
     def add_child(self, obj):
         self.children.append(obj)
@@ -51,13 +63,14 @@ class Node:
                 "expected_change": self.expected_change,
                 "coefficient": self.coefficient
             },
-            "children":[]
+            "children":None
         }
-
+        children = []
         if self.children:
             for i in self.children:
                 
                 c = i.to_json()
-                res["children"].append(c)
+                children.append(c)
 
+        res["children"] = children
         return res
