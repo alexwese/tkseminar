@@ -3,7 +3,6 @@ from flask_cors import CORS
 import pandas as pd
 import logging
 from Node import Node
-from NewNode import NewNode
 import json
 from json import JSONEncoder
 from main import *
@@ -19,47 +18,111 @@ logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:
     datefmt='%Y-%m-%d %H:%M:%S',
     level=logging.INFO)
 
-#@app.route('/calculate_price', methods=['POST'])
-def calculate_price(content):
-    nodes_list = []
-    node_objs = []
-    result = 0
-    #content = request.json
-    logging.info(content)
-    nodes = content['nodes']
 
+def create_network_objects(content):
+    
+    #First Level
+    aluminium_node = Node(content['attributes']['node_id'], content['name'], content['attributes']['new_expected_value'],
+                                      content['attributes']['initial_regression_value'], content['attributes']['expected_change'],
+                                      content['attributes']['coefficient'],content['attributes']['intercept'], [])
+    
+    #Second Level
+    nodes = content['children']
     for i in nodes:
-        nodes_list.append(Node(i['node_id'], i['name'], i['base_val'], i['coefficient'], i['input_nodes']))
+
+        #Third Level
+        if "children" in i:
+            
+            new_node = Node(i['attributes']['node_id'], i['name'], i['attributes']['new_expected_value'],
+                                      i['attributes']['initial_regression_value'], i['attributes']['expected_change'],
+                                      i['attributes']['coefficient'],i['attributes']['intercept'], [])
+            for j in i['children']:
+                cnode = Node(j['attributes']['node_id'], j['name'], j['attributes']['new_expected_value'],
+                                      j['attributes']['initial_regression_value'], j['attributes']['expected_change'],
+                                      j['attributes']['coefficient'],j['attributes']['intercept'], [])
+                new_node.add_child(cnode)
+            aluminium_node.add_child(new_node)
+            
+        else:
+            new_node = Node(i['attributes']['node_id'], i['name'], i['attributes']['new_expected_value'],
+                                      i['attributes']['initial_regression_value'], i['attributes']['expected_change'],
+                                      i['attributes']['coefficient'],i['attributes']['intercept'], [])
+    
+            aluminium_node.add_child(new_node)
+
+    return aluminium_node
+    
+    
+    
+def recalculate_regression_for_network(node):
+
+    secondlevel = node.get_children()
+    #2 Level
+    for i in secondlevel:
+        
+
+        if i.get_children():
+            logging.info(i.name)
+            i.cal_new_expected_value()
+            logging.info(i.new_expected_value)
+    
+    #Aluminium Node
+    node.cal_new_expected_value()
+    print(node.new_expected_value)
 
 
-    for obj in nodes_list:
-        node_objs.append(obj)
-        logging.info(obj.name)
 
-# Integrate user inputs of expected values
-    inputs = content['inputs']
-    for i in inputs:
-        if i['expected_val'] != 0:
-            for node in node_objs:
-                if node.node_id == i['node_id']:
-                    logging.info(node.impact)
-                    node.set_expected_val(i['expected_val'])
-                    logging.info(node.impact)
-                    logging.info("found")
-        build_network(node_objs)
 
-    for i in node_objs:
-        if(i.name == "aluminium price"):
-            result = i.expected_val
-    return jsonify(result)
+def update_network(node,node_id,value):
+    
+    n = get_node_byID(node,node_id)
+    n.set_expected_change(value)
+    recalculate_regression_for_network(node)
+    
+
+    
+def get_node_byID(root,id):
+
+    if root.node_id == id:
+        return root
+    else:
+        root = root.get_children()
+
+        for i in root:
+
+            if i.node_id == id:
+                return i
+            else:
+                if i.children:
+
+                    for j in i.children:
+
+                        if j.node_id == id:
+                            return j
+
+    return None
+
+
+
+def create_json(node):
+
+    pass
+
+
+
+
+
+
+
+
 
 
 @app.route('/calculate', methods=['POST'])
 def calculate():
     content = request.json
-    i = build_network()
+    #i = build_network()
     inputs = content['inputs']
-    aluminium_node = NewNode(i['attributes']['node_id'], i['name'], i['attributes']['absolute_val'],
+    aluminium_node = Node(i['attributes']['node_id'], i['name'], i['attributes']['absolute_val'],
                                       i['attributes']['base_val'], i['attributes']['expected_change'],
                                       i['attributes']['coefficient'], [])
     nodes = i['children']
@@ -68,19 +131,21 @@ def calculate():
     for i in nodes:
         if "children" in i:
             child_list = []
-            new_node = NewNode(i['attributes']['node_id'], i['name'], i['attributes']['absolute_val'],
+            new_node = Node(i['attributes']['node_id'], i['name'], i['attributes']['absolute_val'],
                                       i['attributes']['base_val'], i['attributes']['expected_change'],
                                       i['attributes']['coefficient'], [])
             for j in i['children']:
-                child_list.append(NewNode(j['attributes']['node_id'], j['name'], j['attributes']['absolute_val'],
+                child_list.append(Node(j['attributes']['node_id'], j['name'], j['attributes']['absolute_val'],
                                       j['attributes']['base_val'], j['attributes']['expected_change'],
                                       j['attributes']['coefficient'], []))
             new_node.add_child(child_list)
             nodes_list.append(new_node)
         else:
-            nodes_list.append(NewNode(i['attributes']['node_id'], i['name'], i['attributes']['absolute_val'],
+            nodes_list.append(Node(i['attributes']['node_id'], i['name'], i['attributes']['absolute_val'],
                                       i['attributes']['base_val'], i['attributes']['expected_change'],
                                       i['attributes']['coefficient'], []))
+    
+    
     result = []
     for i in inputs:
         for obj in nodes_list:
@@ -141,8 +206,10 @@ def calculate():
 
 
 
-@app.route('/build_network', methods=['GET'])
-def build_network():
+
+
+@app.route('/get_basenetwork', methods=['GET'])
+def get_basenetwork():
 
     p = Path(__file__).with_name('new_risk_data.json')
     filename = p.absolute()
@@ -151,7 +218,6 @@ def build_network():
     base_network = json.load(file)
     file.close()
 
-    
     return base_network
 
 
@@ -166,8 +232,11 @@ if __name__ == '__main__':
     file = open(filename)
     base_network = json.load(file)
     file.close()
-    calculate_price(base_network)
+    alu = create_network_objects(base_network)
+    recalculate_regression_for_network(alu)
+    d = get_node_byID(alu,3)
 
+    print(1)
 
     app.run(host='localhost',port=8080)
 

@@ -4,7 +4,7 @@
     "node_id": 0,
     "intercept": 2340.4674,
     "new_expected_value": 3245.79,
-    "inital_regression_value": 3245.79,
+    "initial_regression_value": 3245.79,
     "expected_change": 0,
     "coefficient": 0.13
   },
@@ -37,7 +37,7 @@
         "node_id": 3,
         "intercept": 13.48,
         "new_expected_value": 259.85,
-        "initial_regression_value": 259.85,
+        "initial_regression_value": 323.89,
         "expected_change": 0,
         "coefficient": 2.44236841
       },
@@ -47,8 +47,8 @@
           "attributes": {
             "node_id": 4,
             "intercept": null,
-            "absolute_val": 259.85,
-            "inital_regression_value": 259.85,
+            "new_expected_value": 125,
+            "initial_regression_value": 125,
             "expected_change": 0,
             "coefficient": 1.71864581
           }
@@ -58,8 +58,8 @@
           "attributes": {
             "node_id": 5,
             "intercept": null,
-            "absolute_val": 259.85,
-            "base_val": 259.85,
+            "new_expected_value": 32.9,
+            "initial_regression_value": 32.9,
             "expected_change": 0,
             "coefficient": 2.90536057
           }
@@ -83,7 +83,7 @@
         "node_id": 7,
         "intercept": 0,
         "new_expected_value": 5669,
-        "initial_regression_value": 5669,
+        "initial_regression_value": 5693,
         "expected_change": 0,
         "coefficient": 0.00970726136
       },
@@ -93,8 +93,8 @@
           "attributes": {
             "node_id": 8,
             "intercept":null,
-            "new_expected_value": 3348,
-            "initial_regression_value": 3348,
+            "new_expected_value": 3475,
+            "initial_regression_value": 3475,
             "expected_change": 0,
             "coefficient": 1
           }
@@ -104,8 +104,8 @@
           "attributes": {
             "node_id": 9,
             "intercept": null,
-            "new_expected_value": 135,
-            "initial_regression_value": 135,
+            "new_expected_value": 144,
+            "initial_regression_value": 144,
             "expected_change": 0,
             "coefficient": 1
           }
@@ -137,8 +137,8 @@
           "attributes": {
             "node_id": 12,
             "intercept": null,
-            "new_expected_value": 236,
-            "initial_regression_value": 236,
+            "new_expected_value": 344,
+            "initial_regression_value": 344,
             "expected_change": 0,
             "coefficient": 1
           }
@@ -148,8 +148,8 @@
           "attributes": {
             "node_id": 13,
             "intercept": null,
-            "new_expected_value": 338,
-            "initial_regression_value": 338,
+            "new_expected_value": 236,
+            "initial_regression_value": 236,
             "expected_change": 0,
             "coefficient": 1
           }
@@ -159,8 +159,8 @@
           "attributes": {
             "node_id": 14,
             "intercept": null,
-            "new_expected_value": 321,
-            "initial_regression_value": 321,
+            "new_expected_value": 313,
+            "initial_regression_value": 313,
             "expected_change": 0,
             "coefficient": 1
           }
@@ -175,13 +175,25 @@
             "expected_change": 0,
             "coefficient": 1
           }
+        },
+        {
+          "name": "Oceania Production",
+          "attributes": {
+            "node_id": 16,
+            "intercept": null,
+            "new_expected_value": 159,
+            "initial_regression_value": 159,
+            "expected_change": 0,
+            "coefficient": 1
+          }
         }
+
       ]
     },
     {
       "name": "CNY - USD index",
       "attributes": {
-        "node_id": 16,
+        "node_id": 17,
         "intercept": null,
         "new_expected_value": 7.16,
         "initial_regression_value": 7.16,
@@ -192,7 +204,7 @@
     {
       "name": "RUB - USD index",
       "attributes": {
-        "node_id": 17,
+        "node_id": 18,
         "intercept": null,
         "new_expected_value": 60.61,
         "initial_regression_value": 60.61,
@@ -203,7 +215,7 @@
     {
       "name": "CAD - USD index",
       "attributes": {
-        "node_id": 18,
+        "node_id": 19,
         "intercept": null,
         "new_expected_value": 1.34,
         "initial_regression_value": 1.34,
@@ -214,7 +226,7 @@
     {
       "name": "RBI - USD index",
       "attributes": {
-        "node_id": 19,
+        "node_id": 20,
         "intercept": null,
         "new_expected_value": 81.72,
         "initial_regression_value": 81.72,
@@ -225,10 +237,10 @@
     {
       "name": "Global GDP",
       "attributes": {
-        "node_id": 20,
+        "node_id": 21,
         "intercept": null,
-        "absolute_val": 114,
-        "base_val": 114,
+        "new_expected_value": 114,
+        "initial_regression_value": 114,
         "expected_change": 0,
         "coefficient": 4.08037982
       }
