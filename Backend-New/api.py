@@ -19,13 +19,12 @@ logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:
     datefmt='%Y-%m-%d %H:%M:%S',
     level=logging.INFO)
 
-@app.route('/calculate_price', methods=['POST'])
-
-def calculate_price():
+#@app.route('/calculate_price', methods=['POST'])
+def calculate_price(content):
     nodes_list = []
     node_objs = []
     result = 0
-    content = request.json
+    #content = request.json
     logging.info(content)
     nodes = content['nodes']
 
@@ -54,8 +53,8 @@ def calculate_price():
             result = i.expected_val
     return jsonify(result)
 
-@app.route('/calculate', methods=['POST'])
 
+@app.route('/calculate', methods=['POST'])
 def calculate():
     content = request.json
     i = build_network()
@@ -140,8 +139,9 @@ def calculate():
 
 
 
-@app.route('/build_network', methods=['GET'])
 
+
+@app.route('/build_network', methods=['GET'])
 def build_network():
 
     p = Path(__file__).with_name('new_risk_data.json')
@@ -150,6 +150,8 @@ def build_network():
     file = open(filename)
     base_network = json.load(file)
     file.close()
+
+    
     return base_network
 
 
@@ -157,6 +159,16 @@ def build_network():
 
 
 if __name__ == '__main__':
+    
+    p = Path(__file__).with_name('new_risk_data.json')
+    filename = p.absolute()
+
+    file = open(filename)
+    base_network = json.load(file)
+    file.close()
+    calculate_price(base_network)
+
+
     app.run(host='localhost',port=8080)
 
 
