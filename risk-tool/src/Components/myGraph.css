@@ -1,7 +1,9 @@
-.node-title {
-  dx: -200;
-  fill: green;
+h4 {
+  color: white;
 }
-
-.node-label {
+#collapsable {
+  color: rgb(255, 255, 255);
+  stroke-width: 0;
+  background-color: #003c7d;
+  border-color: transparent;
 }

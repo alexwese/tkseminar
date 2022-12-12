@@ -11,12 +11,12 @@
 }
 
 #pencil {
-  color: black;
+  color: rgb(255, 255, 255);
   stroke-width: 0;
 }
 
 #pencil:hover {
-  color: rgb(61, 61, 61);
+  color: rgb(185, 185, 185);
   font-size: 23px;
   padding-left: 2px;
   stroke-width: 0;
@@ -24,4 +24,16 @@
 
 #example-collapse-text {
   padding: 0 16px 0 16px;
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
 }

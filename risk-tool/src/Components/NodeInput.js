@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import axios from "axios";
 
 import "./nodeInput.css";
@@ -14,42 +14,49 @@ import Collapse from "react-bootstrap/Collapse";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
-export default function NodeInput(nodeDatum) {
+export default function NodeInput(props) {
   const [open, setOpen] = useState(false);
+
   const [expChange, setExpChange] = useState(
-    nodeDatum.attributes.attributes.expected_change
+    props.attributes.attributes.expected_change
   );
+
   const [expValue, setExpValue] = useState(
-    nodeDatum.attributes.attributes.absolute_val
+    props.attributes.attributes.absolute_val
   );
 
   const [baseValue, setBaseValue] = useState(
-    nodeDatum.attributes.attributes.base_val
+    props.attributes.attributes.base_val
   );
 
+  useEffect(() => {
+    setExpChange(props.attributes.attributes.expected_change);
+    setExpValue(props.attributes.attributes.absolute_val);
+    setBaseValue(props.attributes.attributes.base_val);
+  }, [props]);
+
   const handleChange = (event) => {
+    console.log(event.target.value);
     setExpChange(event.target.value);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("do validate");
 
     var dataObject = {
-      id: nodeDatum.attributes.name,
+      id: props.attributes.name,
       expChange: expChange,
     };
 
     // axios
-    //   .post(`https://reqbin.com/echo/post/json`, { dataObject })
+    //   .post(`https://reqbin.com/echo/post/json`,  dataObject )
     //   .then((res) => {
     //     console.log(res);
     //     console.log(res.data);
     //   });
 
     axios.get(`http://localhost:8080/build_network`).then((res) => {
-      console.log(res);
-      console.log(res.data);
+      props.parentCallback(res.data);
     });
   };
 
@@ -58,17 +65,23 @@ export default function NodeInput(nodeDatum) {
       handleSubmit();
     }
   };
-
   return (
     <>
-      <ListGroup.Item>
-        <Form.Group as={Row} className="mb-3" controlId="formPlaintextEmail">
+      <ListGroup.Item style={{ backgroundColor: "transparent" }}>
+        <Form.Group
+          as={Row}
+          className="mb-3"
+          controlId="formPlaintextEmail"
+          style={{
+            color: "white",
+          }}
+        >
           <Form.Label column sm="5">
             Expected Value
           </Form.Label>
           <Col sm="5">
             <Form.Control
-              style={{ marginTop: "12px" }}
+              style={{ marginTop: "12px", color: "white" }}
               plaintext
               readOnly
               type="number"
@@ -76,7 +89,7 @@ export default function NodeInput(nodeDatum) {
             />
           </Col>
           <Col sm="2">
-            {nodeDatum.attributes.name != "Aluminium price" && (
+            {props.attributes.name !== "Aluminium price" && (
               <Button
                 id="edit"
                 onClick={() => setOpen(!open)}
@@ -122,6 +135,7 @@ export default function NodeInput(nodeDatum) {
               </Form.Label>
               <Col sm="7">
                 <Form.Control
+                  style={{ color: "white" }}
                   plaintext
                   readOnly
                   type="number"
