@@ -57,7 +57,7 @@ class Node:
             "name": self.name,
             "attributes": {
                 "node_id": self.node_id,
-                "intercept": None,
+                "intercept": self.intercept,
                 "new_expected_value": self.new_expected_value,
                 "initial_regression_value": self.initial_regression_value,
                 "expected_change": self.expected_change,
