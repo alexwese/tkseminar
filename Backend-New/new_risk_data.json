@@ -2,8 +2,9 @@
   "name": "Aluminium price",
   "attributes": {
     "node_id": 0,
-    "absolute_val": 3245.79,
-    "base_val": 3245.79,
+    "intercept": 2340.4674,
+    "new_expected_value": 3245.79,
+    "inital_regression_value": 3245.79,
     "expected_change": 0,
     "coefficient": 0.13
   },
@@ -11,51 +12,56 @@
     {
       "name": "Global zinc price index",
       "attributes": {
-        "node_id": 102,
-        "absolute_val": 259.85,
-        "base_val": 259.85,
+        "node_id": 1,
+        "intercept": null,
+        "new_expected_value": null,
+        "inital_regression_value": 22950,
         "expected_change": 0,
-        "coefficient": 4.1
+        "coefficient": 0.31859821
       }
     },
     {
-      "name": "Global nickel price index",
+      "name": "Global Nickel price index",
       "attributes": {
-        "node_id": 103,
-        "absolute_val": 259.85,
-        "base_val": 259.85,
+        "node_id": 2,
+        "intercept": null,
+        "new_expected_value": null,
+        "inital_regression_value": 22950,
         "expected_change": 0,
-        "coefficient": 4.1
+        "coefficient": -0.003768
       }
     },
     {
       "name": "Global energy price index",
       "attributes": {
-        "node_id": 104,
-        "absolute_val": 259.85,
-        "base_val": 259.85,
+        "node_id": 3,
+        "intercept": 13.48,
+        "new_expected_value": 259.85,
+        "inital_regression_value": 259.85,
         "expected_change": 0,
-        "coefficient": 9
+        "coefficient": 2.44236841
       },
       "children": [
         {
           "name": "Oil price",
           "attributes": {
-            "node_id": 105,
+            "node_id": 4,
+            "intercept": null,
             "absolute_val": 259.85,
-            "base_val": 259.85,
+            "inital_regression_value": 259.85,
             "expected_change": 0,
-            "coefficient": 0.13
+            "coefficient": 1.71864581
           }
         },
         {
           "name": "Gas price",
           "attributes": {
-            "node_id": 106,
+            "node_id": 5,
+            "intercept": null,
             "absolute_val": 259.85,
             "base_val": 259.85,
             "expected_change": 0,
-            "coefficient": 0.13
+            "coefficient": 2.90536057
           }
         }
       ]
@@ -63,7 +69,8 @@
     {
       "name": "USD index",
       "attributes": {
-        "node_id": 107,
+        "node_id": 6,
+        "intercept": null,
         "absolute_val": 105.07,
         "base_val": 105.07,
         "expected_change": 0,
@@ -73,7 +80,8 @@
     {
       "name": "Global production (1000 tons)",
       "attributes": {
-        "node_id": 108,
+        "node_id": 7,
+        "intercept": 0,
         "absolute_val": 5850,
         "base_val": 5850,
         "expected_change": 0,
@@ -83,51 +91,56 @@
         {
           "name": "Chinese Production",
           "attributes": {
-            "node_id": 109,
+            "node_id": 8,
+            "intercept":null,
             "absolute_val": 0,
             "base_val": 0,
             "expected_change": 0,
-            "coefficient": 0.13
+            "coefficient": 1
           }
         },
         {
-          "name": "Africa Production",
+          "name": "African Production",
           "attributes": {
-            "node_id": 110,
+            "node_id": 9,
+            "intercept": null,
             "absolute_val": 0,
             "base_val": 0,
             "expected_change": 0,
-            "coefficient": 0.13
+            "coefficient": 1
           }
         },
         {
-          "name": "Asia (ex China) Production",
+          "name": "Asian (ex China) Production",
           "attributes": {
-            "node_id": 11,
+            "node_id": 10,
+            "intercept": null,
             "absolute_val": 0,
             "base_val": 0,
             "expected_change": 0,
-            "coefficient": 0.13
+            "coefficient": 1
           }
         },
         {
           "name": "Gulf Production",
           "attributes": {
-            "node_id": 112,
+            "node_id": 11,
+            "intercept":null,
             "absolute_val": 0,
             "base_val": 0,
             "expected_change": 0,
-            "coefficient": 0.13
+            "coefficient": 1
           }
         },
         {
-          "name": "NEW NODE PRODUCTION",
+          "name": "Russia ad Eastern European Production",
           "attributes": {
-            "node_id": 113,
+            "node_id": 12,
+            "intercept": null,
             "absolute_val": 0,
             "base_val": 0,
             "expected_change": 0,
-            "coefficient": 0.13
+            "coefficient": 1
           }
         }
       ]
@@ -135,7 +148,7 @@
     {
       "name": "CNY - USD index",
       "attributes": {
-        "node_id": 114,
+        "node_id": 13,
         "absolute_val": 105.07,
         "base_val": 105.07,
         "expected_change": 0,
