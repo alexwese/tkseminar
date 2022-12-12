@@ -58,9 +58,12 @@ def calculate_price():
 
 def calculate():
     content = request.json
-    network = json.load(open("risk_data.json"))
+    i = build_network()
     inputs = content['inputs']
-    nodes = network['children']
+    aluminium_node = NewNode(i['attributes']['node_id'], i['name'], i['attributes']['absolute_val'],
+                                      i['attributes']['base_val'], i['attributes']['expected_change'],
+                                      i['attributes']['coefficient'], [])
+    nodes = i['children']
     nodes_list = []
 
     for i in nodes:
@@ -96,10 +99,43 @@ def calculate():
                         logging.info(child.impact)
                         logging.info(obj.cal_absolute_value())
 
-# final update for all nodes
     for node in nodes_list:
         node.cal_absolute_value()
-        result = json.dumps(node, cls=CustomEncoder)
+        aluminium_node.cal_absolute_value()
+    #Construct final network
+
+    result = {"name": aluminium_node.name,
+              "attributes": {
+                  "node_id": aluminium_node.node_id,
+                  "absolute_val": aluminium_node.absolute_val,
+                  "base_val": aluminium_node.base_val,
+                  "expected_change": aluminium_node.expected_change,
+                  "coefficient": aluminium_node.coefficient
+              },
+              "children": None
+              }
+
+#iterate through children
+
+
+#Add Aluminium children to final json
+
+
+    # final update for all nodes
+    for node in nodes_list:
+
+        result = {"name": node.name,
+                  "attributes": {
+                    "node_id": node.node_id,
+                    "absolute_val": node.absolute_val,
+                    "base_val": node.base_val,
+                    "expected_change": node.expected_change,
+                    "coefficient": node.coefficient
+                  },
+                  "children": None
+                  }
+
+
     return jsonify(result)
 
 
