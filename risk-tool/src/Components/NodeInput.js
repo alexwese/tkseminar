@@ -14,6 +14,8 @@ import Collapse from "react-bootstrap/Collapse";
 import EditIcon from "@mui/icons-material/Edit";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
+const url = `http://localhost:8080`;
+
 export default function NodeInput(props) {
   const [open, setOpen] = useState(false);
 
@@ -49,7 +51,7 @@ export default function NodeInput(props) {
     };
 
     // axios
-    //   .post(`https://reqbin.com/echo/post/json`,  dataObject )
+    //   .post(url+'/some_adress',  dataObject )
     //   .then((res) => {
     //     console.log(res);
     //     console.log(res.data);
