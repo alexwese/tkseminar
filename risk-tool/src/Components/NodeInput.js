@@ -47,10 +47,12 @@ export default function NodeInput(props) {
 
     var dataObject = {
       id: props.attributes.attributes.node_id,
-      expChange: expChange,
+      expChange: parseInt(expChange),
     };
+    console.log(dataObject);
 
     axios.post(url + "/change_network", dataObject).then((res) => {
+      console.log(res.data);
       props.parentCallback(res.data);
     });
   };

@@ -42,20 +42,23 @@ const renderForeignObjectNode = ({
           <ListGroup variant="flush">
             <ListGroup.Item style={{ backgroundColor: "transparent" }}>
               <h4>{nodeDatum.name}</h4>
+              <div>{String(nodeDatum.hasOwnProperty("children"))}</div>
             </ListGroup.Item>
             <NodeInput attributes={nodeDatum} parentCallback={handleCallback} />
+            {console.log(nodeDatum.children)}
             <ListGroup.Item style={{ backgroundColor: "transparent" }}>
-              {nodeDatum.hasOwnProperty("children") ? (
-                <Button id="collapsable" onClick={toggleNode}>
-                  {nodeDatum.__rd3t.collapsed ? <AddIcon /> : <RemoveIcon />}
-                </Button>
-              ) : (
+              {!nodeDatum.hasOwnProperty("children") &&
+              nodeDatum.children === [] ? (
                 <Button
                   style={{ backgroundColor: "#003c7d86" }}
                   id="collapsable"
                   onClick={toggleNode}
                   disabled
                 >
+                  {nodeDatum.__rd3t.collapsed ? <AddIcon /> : <RemoveIcon />}
+                </Button>
+              ) : (
+                <Button id="collapsable" onClick={toggleNode}>
                   {nodeDatum.__rd3t.collapsed ? <AddIcon /> : <RemoveIcon />}
                 </Button>
               )}
