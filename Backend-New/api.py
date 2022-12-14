@@ -25,7 +25,7 @@ def create_network_objects(content):
     #First Level
     aluminium_node = Node(content['attributes']['node_id'], content['name'], content['attributes']['new_expected_value'],
                                       content['attributes']['initial_regression_value'], content['attributes']['expected_change'],
-                                      content['attributes']['coefficient'],content['attributes']['intercept'],i['attributes']['lvl'], [])
+                                      content['attributes']['coefficient'],content['attributes']['intercept'],content['attributes']['lvl'], [])
     
     #Second Level
     nodes = content['children']
