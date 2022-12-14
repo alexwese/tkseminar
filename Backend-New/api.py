@@ -54,7 +54,7 @@ def create_network_objects(content):
     return aluminium_node
     
     
-    
+#not needed anymore    
 def recalculate_allregressions_for_network(node):
 
     secondlevel = node.get_children()
@@ -85,7 +85,9 @@ def get_parent(root, node):
                 for c in rc.children:
 
                     if (node.node_id == c.node_id):
-                        return c
+                        return rc
+
+
 
 
 def update_networknode(root,node_id,value):
@@ -105,12 +107,8 @@ def update_networknode(root,node_id,value):
 
 
 
-#def trigger_changes(root,node_id):
 
-#    pass
-
-
-
+#not needed
 def update_network(root,node_id,value):
     
     n = get_node_byID(root,node_id)
