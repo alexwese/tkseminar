@@ -73,7 +73,19 @@ def recalculate_allregressions_for_network(node):
 
 
 
+def get_parent(root, node):
 
+    for child in root.children:
+        if(node.node_id == child.node_id):
+            return root
+        else:
+
+            for rc in root.children:
+
+                for c in rc.children:
+
+                    if (node.node_id == c.node_id):
+                        return c
 
 
 def update_networknode(root,node_id,value):
@@ -81,7 +93,7 @@ def update_networknode(root,node_id,value):
     changed_node = get_node_byID(root,node_id)
     changed_node.set_expected_change(value)
 
-    parent = changed_node.get_parent()
+    parent = get_parent(root,changed_node)
 
     if(parent.node_id == 0):
         new_parent_value = parent.cal_new_expected_value()
@@ -91,9 +103,10 @@ def update_networknode(root,node_id,value):
 
 
 
-def trigger_changes(root,node_id):
 
-    pass
+#def trigger_changes(root,node_id):
+
+#    pass
 
 
 
@@ -165,7 +178,7 @@ def change_network():
     file = read_usernetwork(user)
     alu = create_network_objects(file)
 
-    update_network(alu,nodeid,expChange)
+    update_networknode(alu,nodeid,expChange)
 
     # Overwriting of file
     if user == "User1":

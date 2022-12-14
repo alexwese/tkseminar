@@ -2,6 +2,9 @@ import logging
 from scipy.optimize import fsolve
 from math import exp
 
+    
+
+
 class Node:
     # constructor method
     def __init__(self, node_id, name, new_expected_value, 
@@ -26,18 +29,6 @@ class Node:
 
 
 
-    def get_parent(self):
-
-        root = get_node_byID(0)
-
-        if(self.node_id == root.children.node_id):
-            return root
-        else:
-
-            for c in root.children:
-
-                if (self.node_id == c.children.node_id):
-                    return c
 
 
     def add_child(self, obj):
