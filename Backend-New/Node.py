@@ -6,7 +6,7 @@ class Node:
     # constructor method
     def __init__(self, node_id, name, new_expected_value, 
                 initial_regression_value, expected_change, 
-                coefficient,intercept, children):
+                coefficient,intercept,level, children):
         self.node_id = node_id
         self.name = name
         self.initial_regression_value = initial_regression_value    # originally set value
@@ -15,6 +15,7 @@ class Node:
         self.coefficient = coefficient
         self.children = children
         self.intercept = intercept
+        self.level = level
 
 
 
@@ -23,18 +24,6 @@ class Node:
         logging.info("Changed from " + str(self.new_expected_value) + " to " + str(self.new_expected_value + self.expected_change) )
         self.new_expected_value = round(self.new_expected_value + new_value, 2)
 
-
-    def backtrack_change_of_children(self):
-        
-        if self.children:
-
-            v = self.new_expected_value - self.intercept 
-            sum = 0
-            for i in self.children:
-                x = vars
-                sum = sum + i.coefficient * x 
-
-            logging.info(sum)
 
 
     def get_parent(self):
@@ -82,7 +71,8 @@ class Node:
                 "new_expected_value": self.new_expected_value,
                 "initial_regression_value": self.initial_regression_value,
                 "expected_change": self.expected_change,
-                "coefficient": self.coefficient
+                "coefficient": self.coefficient,
+                "lvl": self.level
             },
             "children":None
         }
