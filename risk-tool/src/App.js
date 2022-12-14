@@ -7,7 +7,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MyGraph from "./Components/MyGraph";
 import AppFooter from "./Components/AppFooter";
 import { useState } from "react";
-import { height } from "@mui/system";
 
 function App() {
   const [user, setUser] = useState("User1");

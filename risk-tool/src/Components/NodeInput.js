@@ -47,7 +47,7 @@ export default function NodeInput(props) {
 
     var dataObject = {
       id: props.attributes.attributes.node_id,
-      expChange: parseInt(expChange),
+      expChange: parseFloat(expChange),
     };
     console.log(dataObject);
 

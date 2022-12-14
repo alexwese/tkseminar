@@ -86,7 +86,9 @@ const MyGraph = (props) => {
   useEffect(() => {
     const getGraph = async () => {
       try {
-        const response = await axios.get(url + "/get_basenetwork");
+        const response = await axios.get(url + "/get_basenetwork", {
+          params: { username: props.props },
+        });
         setGraph(response.data);
       } catch (e) {
         console.log(e);

@@ -19,9 +19,9 @@ class Node:
 
 
     def set_expected_change(self, new_value):
-        self.expected_change = new_value
+        self.expected_change = 0 #(prev: new_value)
         logging.info("Changed from " + str(self.new_expected_value) + " to " + str(self.new_expected_value + self.expected_change) )
-        self.new_expected_value = self.new_expected_value + self.expected_change
+        self.new_expected_value = round(self.new_expected_value + new_value, 2)
 
 
     def backtrack_change_of_children(self):

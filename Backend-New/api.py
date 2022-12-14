@@ -117,6 +117,8 @@ def change_network():
     expChange = content['expChange']
     update_network(alu,nodeid,expChange)
 
+    # überschreiben der datei
+
     return jsonify(alu.to_json())
 
 
@@ -129,6 +131,8 @@ def change_network():
 
 @app.route('/get_basenetwork', methods=['GET'])
 def get_basenetwork():
+    
+    # if
 
     p = Path(__file__).with_name('new_risk_data.json')
     filename = p.absolute()
