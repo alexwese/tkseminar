@@ -30,10 +30,10 @@ const renderForeignObjectNode = ({
   var backgroundColor = "#0094D8";
 
   if (nodeDatum.attributes.lvl === 1) {
-    backgroundColor = "#007DB8";
+    backgroundColor = "#0AB1FF";
   }
   if (nodeDatum.attributes.lvl === 2) {
-    backgroundColor = "#00628F";
+    backgroundColor = "#33BEFF";
   }
 
   return (
