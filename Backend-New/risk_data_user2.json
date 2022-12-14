@@ -225,7 +225,7 @@
       "attributes": {
         "node_id": 17,
         "intercept": null,
-        "new_expected_value": 7.16,
+        "new_expected_value": 9.58,
         "initial_regression_value": 7.16,
         "expected_change": 0,
         "coefficient": -216.777463,

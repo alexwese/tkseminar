@@ -27,6 +27,11 @@ const renderForeignObjectNode = ({
   const handleCallback = (data) => {
     myGraphCallback(data);
   };
+
+  if (nodeDatum.attributes.lvl === 0) {
+  } else {
+  }
+
   return (
     <g>
       {/* `foreignObject` requires width & height to be explicitly set. */}
@@ -43,9 +48,12 @@ const renderForeignObjectNode = ({
           <ListGroup variant="flush">
             <ListGroup.Item style={{ backgroundColor: "transparent" }}>
               <h4>{nodeDatum.name}</h4>
-              <div>{user}</div>
+              <div>{nodeDatum.attributes.lvl}</div>
             </ListGroup.Item>
-            <NodeInput attributes={nodeDatum} parentCallback={handleCallback} />
+            <NodeInput
+              attributes={{ nodeDatum, user }}
+              parentCallback={handleCallback}
+            />
             <ListGroup.Item style={{ backgroundColor: "transparent" }}>
               {nodeDatum.children.length === 0 ? (
                 <Button
@@ -86,7 +94,7 @@ const MyGraph = (props) => {
   useEffect(() => {
     const getGraph = async () => {
       try {
-        const response = await axios.get(url + "/get_basenetwork", {
+        const response = await axios.get(url + "/get_usernetwork", {
           params: { username: props.props },
         });
         setGraph(response.data);
@@ -104,7 +112,12 @@ const MyGraph = (props) => {
 
   //Update Network after changes
   function handleCallback(data) {
-    setGraph(data);
+    data.username = props.props;
+    console.log(data);
+    axios.post(url + "/change_network", data).then((res) => {
+      console.log(res.data);
+      setGraph(res.data);
+    });
   }
 
   //Display Tree

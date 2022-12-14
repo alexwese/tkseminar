@@ -18,23 +18,26 @@ const url = `http://localhost:8080`;
 
 export default function NodeInput(props) {
   const [open, setOpen] = useState(false);
-
+  const [user, setUser] = useState(props.attributes.user);
   const [expChange, setExpChange] = useState(
-    props.attributes.attributes.expected_change
+    props.attributes.nodeDatum.attributes.expected_change
   );
 
   const [expValue, setExpValue] = useState(
-    props.attributes.attributes.new_expected_value
+    props.attributes.nodeDatum.attributes.new_expected_value
   );
 
   const [baseValue, setBaseValue] = useState(
-    props.attributes.attributes.initial_regression_value
+    props.attributes.nodeDatum.attributes.initial_regression_value
   );
 
   useEffect(() => {
-    setExpChange(props.attributes.attributes.expected_change);
-    setExpValue(props.attributes.attributes.new_expected_value);
-    setBaseValue(props.attributes.attributes.initial_regression_value);
+    setExpChange(props.attributes.nodeDatum.attributes.expected_change);
+    setExpValue(props.attributes.nodeDatum.attributes.new_expected_value);
+    setBaseValue(
+      props.attributes.nodeDatum.attributes.initial_regression_value
+    );
+    setUser(props.attributes.user);
   }, [props]);
 
   const handleChange = (event) => {
@@ -46,15 +49,13 @@ export default function NodeInput(props) {
     event.preventDefault();
 
     var dataObject = {
-      id: props.attributes.attributes.node_id,
+      id: props.attributes.nodeDatum.attributes.node_id,
       expChange: parseFloat(expChange),
+      username: null,
     };
     console.log(dataObject);
 
-    axios.post(url + "/change_network", dataObject).then((res) => {
-      console.log(res.data);
-      props.parentCallback(res.data);
-    });
+    props.parentCallback(dataObject);
   };
 
   const handleKeyDown = (event) => {
