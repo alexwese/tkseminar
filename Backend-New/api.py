@@ -138,12 +138,19 @@ def change_network():
     nodeid = content['id']
     expChange = content['expChange']
     user = content['username']
+    
     file = read_usernetwork(user)
     alu = create_network_objects(file)
 
     update_network(alu,nodeid,expChange)
 
-    # überschreiben der datei
+    # Overwriting of file
+    if user == "User1":
+        with open('risk_data_user1.json', 'w') as f:
+            json.dump(alu.to_json(), f)
+    else:
+        with open('risk_data_user2.json', 'w') as f:
+            json.dump(alu.to_json(), f)
 
     return jsonify(alu.to_json())
 
