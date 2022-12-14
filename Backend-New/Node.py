@@ -36,6 +36,21 @@ class Node:
 
             logging.info(sum)
 
+
+    def get_parent(self):
+
+        root = get_node_byID(0)
+
+        if(self.node_id == root.children.node_id):
+            return root
+        else:
+
+            for c in root.children:
+
+                if (self.node_id == c.children.node_id):
+                    return c
+
+
     def add_child(self, obj):
         self.children.append(obj)
 
@@ -52,6 +67,8 @@ class Node:
                 new_expected_value = new_expected_value + node.new_expected_value * node.coefficient
             
         self.new_expected_value = round(new_expected_value + self.intercept,2)
+
+        return self.new_expected_value
         
     
 
