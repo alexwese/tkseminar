@@ -91,9 +91,10 @@ def update_networknode(root,node_id,value):
 
 
 
-def trigger_changes(root,node_id):
 
-    pass
+#def trigger_changes(root,node_id):
+
+#    pass
 
 
 
@@ -165,7 +166,7 @@ def change_network():
     file = read_usernetwork(user)
     alu = create_network_objects(file)
 
-    update_network(alu,nodeid,expChange)
+    update_networknode(alu,nodeid,expChange)
 
     # Overwriting of file
     if user == "User1":
