@@ -101,8 +101,9 @@ def update_networknode(root,node_id,value):
         new_parent_value = parent.cal_new_expected_value()
 
     else:
-        new_parent_value = parent.cal_new_expected_value()
-        update_networknode(root,parent.node_id,new_parent_value)
+        old_value = parent.new_expected_value
+        new_parent_value_diff = parent.cal_new_expected_value() - old_value
+        update_networknode(root,parent.node_id,new_parent_value_diff)
 
 
 
