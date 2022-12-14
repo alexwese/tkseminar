@@ -29,7 +29,11 @@ const renderForeignObjectNode = ({
   };
 
   if (nodeDatum.attributes.lvl === 0) {
+    const colorhex = "#0094D8";
   } else if (nodeDatum.attributes.lvl === 1) {
+    const colorhex = "#007DB8";
+  } else {
+    const colorhex = "#00628F";
   }
 
   return (
