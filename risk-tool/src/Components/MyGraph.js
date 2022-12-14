@@ -27,13 +27,13 @@ const renderForeignObjectNode = ({
   const handleCallback = (data) => {
     myGraphCallback(data);
   };
+  var backgroundColor = "#0094D8";
 
-  if (nodeDatum.attributes.lvl === 0) {
-    const colorhex = "#0094D8";
-  } else if (nodeDatum.attributes.lvl === 1) {
-    const colorhex = "#007DB8";
-  } else {
-    const colorhex = "#00628F";
+  if (nodeDatum.attributes.lvl === 1) {
+    backgroundColor = "#007DB8";
+  }
+  if (nodeDatum.attributes.lvl === 2) {
+    backgroundColor = "#00628F";
   }
 
   return (
@@ -44,7 +44,7 @@ const renderForeignObjectNode = ({
           style={{
             width: "18rem",
             borderRadius: "40px",
-            backgroundColor: "#0094d8",
+            backgroundColor: backgroundColor,
             color: "white",
             borderColor: "white",
           }}
