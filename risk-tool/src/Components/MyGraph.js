@@ -29,7 +29,7 @@ const renderForeignObjectNode = ({
   };
 
   if (nodeDatum.attributes.lvl === 0) {
-  } else {
+  } else if (nodeDatum.attributes.lvl === 1) {
   }
 
   return (
