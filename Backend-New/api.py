@@ -204,7 +204,7 @@ def get_basenetwork():
 @app.route('/get_usernetwork', methods=['GET'])
 def get_usernetwork():
     
-    return read_usernetwork(request.form['username'])
+    return read_usernetwork(request.args.get('username'))
    
 
 
