@@ -36,6 +36,11 @@ class Node:
 
             logging.info(sum)
 
+
+    def get_parent(self):
+
+        pass
+
     def add_child(self, obj):
         self.children.append(obj)
 
@@ -52,6 +57,7 @@ class Node:
                 new_expected_value = new_expected_value + node.new_expected_value * node.coefficient
             
         self.new_expected_value = round(new_expected_value + self.intercept,2)
+        
         
     
 

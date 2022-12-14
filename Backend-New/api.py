@@ -73,12 +73,42 @@ def recalculate_regression_for_network(node):
 
 
 
+def update_networknode(root,node_id,value):
 
-def update_network(node,node_id,value):
+    changed_node = get_node_byID(root,node_id)
+    changed_node.set_expected_change(value)
+
+    parent = changed_node.get_parent()
+
+    if(parent.node_id != 0):
+        parent.cal_new_expected_value()
+
+    else:
+        update_networknode(root,parent)
+
     
-    n = get_node_byID(node,node_id)
+
+    secondlevel = root.get_children()
+    #2 Level
+    for i in secondlevel:
+        
+
+        if i.get_children():
+            logging.info(i.name)
+            i.cal_new_expected_value()
+            logging.info(i.new_expected_value)
+    
+    #Aluminium Node
+    #node.cal_new_expected_value()
+    #print(node.new_expected_value)
+
+
+
+def update_network(root,node_id,value):
+    
+    n = get_node_byID(root,node_id)
     n.set_expected_change(value)
-    recalculate_regression_for_network(node)
+    recalculate_regression_for_network(root)
     
 
     
@@ -138,7 +168,7 @@ def change_network():
     nodeid = content['id']
     expChange = content['expChange']
     user = content['username']
-    
+
     file = read_usernetwork(user)
     alu = create_network_objects(file)
 
