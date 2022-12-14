@@ -25,7 +25,7 @@ def create_network_objects(content):
     #First Level
     aluminium_node = Node(content['attributes']['node_id'], content['name'], content['attributes']['new_expected_value'],
                                       content['attributes']['initial_regression_value'], content['attributes']['expected_change'],
-                                      content['attributes']['coefficient'],content['attributes']['intercept'], [])
+                                      content['attributes']['coefficient'],content['attributes']['intercept'],i['attributes']['lvl'], [])
     
     #Second Level
     nodes = content['children']
@@ -40,14 +40,14 @@ def create_network_objects(content):
             for j in i['children']:
                 cnode = Node(j['attributes']['node_id'], j['name'], j['attributes']['new_expected_value'],
                                       j['attributes']['initial_regression_value'], j['attributes']['expected_change'],
-                                      j['attributes']['coefficient'],j['attributes']['intercept'], [])
+                                      j['attributes']['coefficient'],j['attributes']['intercept'],j['attributes']['lvl'], [])
                 new_node.add_child(cnode)
             aluminium_node.add_child(new_node)
             
         else:
             new_node = Node(i['attributes']['node_id'], i['name'], i['attributes']['new_expected_value'],
                                       i['attributes']['initial_regression_value'], i['attributes']['expected_change'],
-                                      i['attributes']['coefficient'],i['attributes']['intercept'], [])
+                                      i['attributes']['coefficient'],i['attributes']['intercept'],i['attributes']['lvl'], [])
     
             aluminium_node.add_child(new_node)
 
