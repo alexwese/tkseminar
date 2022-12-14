@@ -21,6 +21,7 @@ const renderForeignObjectNode = ({
   nodeDatum,
   toggleNode,
   foreignObjectProps,
+  user,
   myGraphCallback,
 }) => {
   const handleCallback = (data) => {
@@ -42,15 +43,13 @@ const renderForeignObjectNode = ({
           <ListGroup variant="flush">
             <ListGroup.Item style={{ backgroundColor: "transparent" }}>
               <h4>{nodeDatum.name}</h4>
-              <div>{String(nodeDatum.hasOwnProperty("children"))}</div>
+              <div>{user}</div>
             </ListGroup.Item>
             <NodeInput attributes={nodeDatum} parentCallback={handleCallback} />
-            {console.log(nodeDatum.children)}
             <ListGroup.Item style={{ backgroundColor: "transparent" }}>
-              {!nodeDatum.hasOwnProperty("children") &&
-              nodeDatum.children === [] ? (
+              {nodeDatum.children.length === 0 ? (
                 <Button
-                  style={{ backgroundColor: "#003c7d86" }}
+                  style={{ backgroundColor: "#003c7d20" }}
                   id="collapsable"
                   onClick={toggleNode}
                   disabled
@@ -74,6 +73,7 @@ const MyGraph = (props) => {
   //Set variables
   const [translate, containerRef] = useCenteredTree();
   const [graph, setGraph] = useState(null);
+  const [user, setUser] = useState(props.props);
   const nodeSize = { x: 500, y: 400 };
   const foreignObjectProps = {
     width: nodeSize.x,
@@ -120,6 +120,7 @@ const MyGraph = (props) => {
               renderForeignObjectNode({
                 ...rd3tProps,
                 foreignObjectProps,
+                user,
                 myGraphCallback: handleCallback,
               })
             }
