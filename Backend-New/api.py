@@ -36,7 +36,7 @@ def create_network_objects(content):
             
             new_node = Node(i['attributes']['node_id'], i['name'], i['attributes']['new_expected_value'],
                                       i['attributes']['initial_regression_value'], i['attributes']['expected_change'],
-                                      i['attributes']['coefficient'],i['attributes']['intercept'], [])
+                                      i['attributes']['coefficient'],i['attributes']['intercept'],i['attributes']['lvl'], [])
             for j in i['children']:
                 cnode = Node(j['attributes']['node_id'], j['name'], j['attributes']['new_expected_value'],
                                       j['attributes']['initial_regression_value'], j['attributes']['expected_change'],
