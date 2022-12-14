@@ -55,7 +55,7 @@ def create_network_objects(content):
     
     
     
-def recalculate_regression_for_network(node):
+def recalculate_allregressions_for_network(node):
 
     secondlevel = node.get_children()
     #2 Level
@@ -73,6 +73,9 @@ def recalculate_regression_for_network(node):
 
 
 
+
+
+
 def update_networknode(root,node_id,value):
 
     changed_node = get_node_byID(root,node_id)
@@ -80,27 +83,17 @@ def update_networknode(root,node_id,value):
 
     parent = changed_node.get_parent()
 
-    if(parent.node_id != 0):
-        parent.cal_new_expected_value()
+    if(parent.node_id == 0):
+        new_parent_value = parent.cal_new_expected_value()
 
     else:
-        update_networknode(root,parent)
+        update_networknode(root,parent,new_parent_value)
 
-    
 
-    secondlevel = root.get_children()
-    #2 Level
-    for i in secondlevel:
-        
 
-        if i.get_children():
-            logging.info(i.name)
-            i.cal_new_expected_value()
-            logging.info(i.new_expected_value)
-    
-    #Aluminium Node
-    #node.cal_new_expected_value()
-    #print(node.new_expected_value)
+def trigger_changes(root,node_id):
+
+    pass
 
 
 
@@ -108,7 +101,7 @@ def update_network(root,node_id,value):
     
     n = get_node_byID(root,node_id)
     n.set_expected_change(value)
-    recalculate_regression_for_network(root)
+    recalculate_allregressions_for_network(root)
     
 
     
@@ -145,7 +138,7 @@ def read_usernetwork(user):
         user_network = json.load(file)
         file.close()
     else:
-        p = Path(__file__).with_name('risk_data_user1.json')
+        p = Path(__file__).with_name('risk_data_user2.json')
         filename = p.absolute()
 
         file = open(filename)
@@ -176,10 +169,10 @@ def change_network():
 
     # Overwriting of file
     if user == "User1":
-        with open('risk_data_user1.json', 'w') as f:
+        with open('Backend-New/risk_data_user1.json', 'w') as f:
             json.dump(alu.to_json(), f)
     else:
-        with open('risk_data_user2.json', 'w') as f:
+        with open('Backend-New/risk_data_user2.json', 'w') as f:
             json.dump(alu.to_json(), f)
 
     return jsonify(alu.to_json())
