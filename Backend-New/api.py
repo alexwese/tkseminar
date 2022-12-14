@@ -104,6 +104,28 @@ def get_node_byID(root,id):
     return None
 
 
+def read_usernetwork(user):
+
+    if user == 'User1':
+
+        p = Path(__file__).with_name('risk_data_user1.json')
+        filename = p.absolute()
+
+        file = open(filename)
+        user_network = json.load(file)
+        file.close()
+    else:
+        p = Path(__file__).with_name('risk_data_user1.json')
+        filename = p.absolute()
+
+        file = open(filename)
+        user_network = json.load(file)
+        file.close()
+
+
+    return user_network
+
+
 
 
 
@@ -115,6 +137,10 @@ def change_network():
 
     nodeid = content['id']
     expChange = content['expChange']
+    user = content['username']
+    file = read_usernetwork(user)
+    alu = create_network_objects(file)
+
     update_network(alu,nodeid,expChange)
 
     # überschreiben der datei
@@ -131,8 +157,6 @@ def change_network():
 
 @app.route('/get_basenetwork', methods=['GET'])
 def get_basenetwork():
-    
-    # if
 
     p = Path(__file__).with_name('new_risk_data.json')
     filename = p.absolute()
@@ -147,19 +171,21 @@ def get_basenetwork():
 
 
 
+@app.route('/get_usernetwork', methods=['GET'])
+def get_usernetwork():
+    
+    return read_usernetwork(request.form['username'])
+   
+
+
+
+
+
+
+
+
 if __name__ == '__main__':
     
-    p = Path(__file__).with_name('new_risk_data.json')
-    filename = p.absolute()
-
-    file = open(filename)
-    base_network = json.load(file)
-    file.close()
-    alu = create_network_objects(base_network)
-    recalculate_regression_for_network(alu)
-
-
-
 
     app.run(host='localhost',port=8080)
 
