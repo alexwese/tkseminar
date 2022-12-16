@@ -93,6 +93,22 @@ def update_networknode(root,node_id,value):
 
     changed_node = get_node_byID(root,node_id)
     changed_node.set_expected_change(value)
+    logging.info(changed_node.name + " set to " + str(changed_node.new_expected_value))
+
+    parent = get_parent(root,changed_node)
+
+    if(parent.node_id == 0):
+        new_parent_value = parent.cal_new_expected_value()
+    else:
+        update_networknode_regressions(root,parent.node_id)
+
+
+
+def update_networknode_regressions(root,node_id):
+
+    changed_node = get_node_byID(root,node_id)
+    changed_node.cal_new_expected_value()
+    logging.info(changed_node.name + " regression value set to " + str(changed_node.new_expected_value))
 
     parent = get_parent(root,changed_node)
 
@@ -100,20 +116,9 @@ def update_networknode(root,node_id,value):
         new_parent_value = parent.cal_new_expected_value()
 
     else:
-        old_value = parent.new_expected_value
-        new_parent_value_diff = parent.cal_new_expected_value() - old_value
-        update_networknode(root,parent.node_id,new_parent_value_diff)
+        update_networknode_regressions(root,parent.node_id)
 
 
-
-
-
-#not needed
-def update_network(root,node_id,value):
-    
-    n = get_node_byID(root,node_id)
-    n.set_expected_change(value)
-    recalculate_allregressions_for_network(root)
     
 
     
@@ -168,6 +173,8 @@ def read_usernetwork(user):
 @app.route('/change_network', methods=['POST'])
 def change_network():
 
+    logging.info("Change network ...")
+
     content = request.json
 
     nodeid = content['id']
@@ -183,6 +190,7 @@ def change_network():
     if user == "User1":
         with open('Backend-New/risk_data_user1.json', 'w') as f:
             json.dump(alu.to_json(), f)
+        pass  
     else:
         with open('Backend-New/risk_data_user2.json', 'w') as f:
             json.dump(alu.to_json(), f)
@@ -206,6 +214,30 @@ def get_basenetwork():
     file = open(filename)
     base_network = json.load(file)
     file.close()
+
+    return base_network
+
+
+@app.route('/reset_usernetwork', methods=['GET'])
+def reset_usernetwork():
+
+    p = Path(__file__).with_name('new_risk_data.json')
+    filename = p.absolute()
+
+    file = open(filename)
+    base_network = json.load(file)
+    file.close()
+
+    user = request.args.get('username')
+    
+    # Overwriting of file
+    if user == "User1":
+        with open('Backend-New/risk_data_user1.json', 'w') as f:
+            json.dump(base_network, f)
+    else:
+        with open('Backend-New/risk_data_user2.json', 'w') as f:
+            json.dump(base_network, f)
+
 
     return base_network
 

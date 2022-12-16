@@ -41,8 +41,8 @@
       "attributes": {
         "node_id": 3,
         "intercept": 13.48,
-        "new_expected_value": 259.85,
-        "initial_regression_value": 323.89,
+        "new_expected_value": 324.22,
+        "initial_regression_value": 324.22,
         "expected_change": 0,
         "coefficient": 2.44236841,
         "lvl": 1
@@ -56,7 +56,7 @@
             "new_expected_value": 125,
             "initial_regression_value": 125,
             "expected_change": 0,
-            "coefficient": 1.71864581,
+            "coefficient": 1.72,
             "lvl": 2
           },
           "children": []
@@ -69,7 +69,7 @@
             "new_expected_value": 32.9,
             "initial_regression_value": 32.9,
             "expected_change": 0,
-            "coefficient": 2.90536057,
+            "coefficient": 2.91,
             "lvl": 2
           },
           "children": []

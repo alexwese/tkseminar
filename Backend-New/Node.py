@@ -24,7 +24,6 @@ class Node:
 
     def set_expected_change(self, new_value):
         self.expected_change = 0 #(prev: new_value)
-        logging.info("Changed from " + str(self.new_expected_value) + " to " + str(self.new_expected_value + self.expected_change) )
         self.new_expected_value = round(self.new_expected_value + new_value, 2)
 
 
@@ -41,12 +40,13 @@ class Node:
 
 
     def cal_new_expected_value(self):
-        new_expected_value = 0
+        logging.info("Update regression value for " + self.name)
+        v = 0
         if self.children:
             for node in self.children:
-                new_expected_value = new_expected_value + node.new_expected_value * node.coefficient
+                v = v + node.new_expected_value * node.coefficient
             
-        self.new_expected_value = round(new_expected_value + self.intercept,2)
+            self.new_expected_value = round(v + self.intercept,2)
 
         return self.new_expected_value
         
