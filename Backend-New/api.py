@@ -4,7 +4,6 @@ import pandas as pd
 import logging
 from Node import Node
 import json
-from main import *
 from pathlib import Path
 
 
