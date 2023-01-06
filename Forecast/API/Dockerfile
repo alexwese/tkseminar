@@ -5,6 +5,7 @@ RUN pip3 install  --no-cache-dir pandas
 RUN pip3 install  --no-cache-dir tornado
 RUN pip3 install  --no-cache-dir requests
 RUN pip3 install  --no-cache-dir statsmodels
+RUN pip install -U torch==1.5
 RUN pip3 install  --no-cache-dir datetime
 RUN pip3 install  --no-cache-dir xlrd
 RUN pip3 install  --no-cache-dir pystan==2.18.0.0

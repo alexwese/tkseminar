@@ -5,6 +5,7 @@ import logging
 from Node import Node
 import json
 from pathlib import Path
+import mysql.connector
 
 
 class CustomEncoder(json.JSONEncoder):
@@ -258,9 +259,28 @@ def get_usernetwork():
 
 
 if __name__ == '__main__':
-    
+    mydb = mysql.connector.connect(
+        host="db",
+        port = "3306",
+        user="root",
+        password="password"
+        )
 
-    app.run(host='localhost',port=8080)
+    print(mydb)    
+
+    cursor = mydb.cursor()
+
+    query = ("SELECT * FROM tkseminar.network_test")
+
+
+    cursor.execute(query)
+    for (network, user_id, session_id, j, basis) in cursor:
+        print(user_id)
+
+
+    cursor.close()
+
+    app.run(host='0.0.0.0',port=8080)
 
 
 
