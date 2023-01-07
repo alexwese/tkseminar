@@ -146,21 +146,21 @@ def get_node_byID(root,id):
 
 def read_usernetwork(user):
 
-    if user == 'User1':
 
-        p = Path(__file__).with_name('risk_data_user1.json')
-        filename = p.absolute()
+    mydb = mysql.connector.connect(
+        host="db",
+        port = "3306",
+        user="root",
+        password="password"
+        ) 
 
-        file = open(filename)
-        user_network = json.load(file)
-        file.close()
-    else:
-        p = Path(__file__).with_name('risk_data_user2.json')
-        filename = p.absolute()
+    cursor = mydb.cursor()
 
-        file = open(filename)
-        user_network = json.load(file)
-        file.close()
+    query = ("SELECT * FROM tkseminar.network_test WHERE user_id = " +  user[4:])
+    cursor.execute(query)
+
+    for (network, user_id, session_id, json_data, basis) in cursor:
+        user_network = json_data
 
 
     return user_network
@@ -186,16 +186,22 @@ def change_network():
 
     update_networknode(alu,nodeid,expChange)
 
-    # Overwriting of file
-    if user == "User1":
-        with open('Backend-New/risk_data_user1.json', 'w') as f:
-            json.dump(alu.to_json(), f)
-        pass  
-    else:
-        with open('Backend-New/risk_data_user2.json', 'w') as f:
-            json.dump(alu.to_json(), f)
+    mydb = mysql.connector.connect(
+        host="db",
+        port = "3306",
+        user="root",
+        password="password"
+        ) 
 
-    return jsonify(alu.to_json())
+    cursor = mydb.cursor()
+
+    json_data = alu.to_json()
+
+    query = ("UPDATE tkseminar.network_test SET json_file '" + json_data + "' WHERE user_id = " + user[4:])
+    cursor.execute(query)
+
+
+    return jsonify(json_data)
 
 
 
@@ -208,12 +214,21 @@ def change_network():
 @app.route('/get_basenetwork', methods=['GET'])
 def get_basenetwork():
 
-    p = Path(__file__).with_name('new_risk_data.json')
-    filename = p.absolute()
+    mydb = mysql.connector.connect(
+        host="db",
+        port = "3306",
+        user="root",
+        password="password"
+        ) 
 
-    file = open(filename)
-    base_network = json.load(file)
-    file.close()
+    cursor = mydb.cursor()
+
+    query = ("SELECT * FROM tkseminar.network_test WHERE basis = 1")
+    cursor.execute(query)
+    
+    for (network, user_id, session_id, json_data, basis) in cursor:
+        base_network = json_data
+
 
     return base_network
 
