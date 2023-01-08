@@ -21,6 +21,9 @@ logging.basicConfig(format='%(asctime)s,%(msecs)d %(levelname)-8s [%(filename)s:
 
 def create_network_objects(content):
     
+
+    logging.info(content)
+
     #First Level
     aluminium_node = Node(content['attributes']['node_id'], content['name'], content['attributes']['new_expected_value'],
                                       content['attributes']['initial_regression_value'], content['attributes']['expected_change'],
@@ -147,6 +150,8 @@ def get_node_byID(root,id):
 def read_usernetwork(user):
 
 
+    u = user[4:]
+
     mydb = mysql.connector.connect(
         host="db",
         port = "3306",
@@ -156,13 +161,13 @@ def read_usernetwork(user):
 
     cursor = mydb.cursor()
 
-    query = ("SELECT * FROM tkseminar.network_test WHERE user_id = " +  user[4:])
+    query = ("SELECT * FROM tkseminar.network_test WHERE user_id = " +  u)
     cursor.execute(query)
 
     for (network, user_id, session_id, json_data, basis) in cursor:
-        user_network = json_data
+        user_network = json.loads(json_data)
 
-
+    logging.info(user_network)
     return user_network
 
 
@@ -197,7 +202,7 @@ def change_network():
 
     json_data = alu.to_json()
 
-    query = ("UPDATE tkseminar.network_test SET json_file '" + json_data + "' WHERE user_id = " + user[4:])
+    query = ("UPDATE tkseminar.network_test SET json_file = '" + str(json_data).replace("'",'"') + "' WHERE user_id = " + user[4:])
     cursor.execute(query)
 
 
@@ -227,7 +232,7 @@ def get_basenetwork():
     cursor.execute(query)
     
     for (network, user_id, session_id, json_data, basis) in cursor:
-        base_network = json_data
+        base_network = json.loads(json_data)
 
 
     return base_network
